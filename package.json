@@ -1,0 +1,33 @@
+{
+  "name": "nuthazle",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "env-cmd -f .env.development next dev",
+    "build": "env-cmd -f .env.production next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.3.3",
+    "@next-auth/firebase-adapter": "^2.0.1",
+    "@react-three/drei": "^9.94.1",
+    "@react-three/fiber": "^8.15.14",
+    "@types/three": "^0.159.0",
+    "@vercel/analytics": "^1.2.2",
+    "env-cmd": "^10.1.0",
+    "firebase": "^10.7.2",
+    "next": "14.0.1",
+    "next-auth": "^4.24.5",
+    "pure-react-carousel": "^1.30.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-zoom-pan-pinch": "^3.4.4",
+    "sharp": "^0.33.2",
+    "three": "^0.149.0"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.0.1"
+  }
+}

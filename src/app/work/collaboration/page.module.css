@@ -1,0 +1,1447 @@
+.page{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: var(--color);
+    background-image: url('/assets/collabo/collab_back2.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    overflow: auto;
+    touch-action: pan-y;
+}
+/*모달*/
+.mushroommodalbox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5dc5e;
+    padding: 0;
+    margin: 0;
+    border: 0px solid transparent;
+    z-index: 10;
+    touch-action: none;
+}
+.mushroommodalconimgbox{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mushroombox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mushroomdec{
+    width: 25rem;
+    height: 25rem;
+}
+.mushroom{
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+}
+.modalbox{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 0px;
+    background-color: #f5f5dc5e;
+    z-index: 7;
+    touch-action: none;
+}
+.xbtn{
+    position: relative;
+    width: 100%;
+    height: 10%;
+    text-align: right;
+    font-size: 2rem;
+    color: var(--color);
+    cursor: pointer;
+    padding-top: 1rem;
+    font-family: var(--dove);
+}
+.xbtn span{
+    padding-right: 1rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    
+}
+.modalconbox{
+    /* height: 90%; */
+    height: auto;
+    min-height: 90%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.modalcontents{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    height: 90%;
+    background-color: beige;
+    box-shadow: 0 0 10px 10px beige;
+    touch-action: none;
+}
+.contents{
+    width: 95%;
+    height: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    color: var(--color);
+    touch-action: none;
+}
+.modalcontitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    line-height: 5rem;
+}
+.modalcontitle p{
+    padding: 0 1rem;
+    font-family: var(--dove);
+    text-align: center;
+    /* letter-spacing: 0.1rem; */
+}
+.modalflower{
+    width: 3rem;
+    height: 3rem;
+}
+.modalcondesc{
+    font-size: 1.2rem;
+    font-family: var(--dove);
+    padding: 1rem 0;
+    border-top: 1px solid var(--color);
+    border-bottom: 1px solid var(--color);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-line;
+    text-align: center;
+}
+.modalconimgdiv{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalconimgdiv::-webkit-scrollbar{
+    width: 0.2rem;
+    background-color: beige;
+}
+.modalconimgdiv::-webkit-scrollbar-thumb{
+    background-color: #916b4d;
+}
+.modalconimgdiv::-webkit-scrollbar-track{
+    background-color: #916b4d7c;
+}
+.modalconimgbox{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modalimgbox{
+    position: relative;
+    /* width: 35rem;
+    height: 35rem; */
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
+.modalsquareimgbox{
+    position: relative;
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+/*요소*/
+.frame1, .frame2, .frame3, .frame4, .frame5, .frame6, .key, .torchleft, .torchright{
+    z-index: 1;
+}
+
+.flower0{
+    width: 5.7rem;
+    height: 5rem;
+    top: 15%;
+    right: 40%;
+    /* 1.14:1 */
+}
+
+.flower1{
+    width: 5rem;
+    height: 5rem;
+    top: 35%;
+    left: 13%;
+    /* 1:1 */
+}
+
+.flower2{
+    width: 5rem;
+    height: 5.9rem;
+    bottom: 15%;
+    left: 45%;
+    /* 1: 1.18*/
+}
+
+.flower3{
+    width: 5.7rem;
+    height: 5rem;
+    bottom: 10%;
+    right: 5%;
+}
+
+.frame0{
+    width: calc(200px * 0.85);
+    height: calc(181px * 0.85);
+    top: 10%;
+    right: 11%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* z-index: 4; */
+}
+.frame1, .frame1shadow{
+    width: calc(350px * 0.75);
+    height: calc(411px * 0.75);
+    top: 15%;
+    left: 18%;
+}
+.frame2, .frame2shadow{
+    width: calc(400px * 0.75);
+    height: calc(469px * 0.75);
+    top: 18%;
+    left: 39%;
+}
+.frame3, .frame3shadow{
+    width: calc(400px * 0.5);
+    height: calc(475px * 0.5);
+    top: 12%;
+    right: 25%;
+}
+.frame4, .frame4shadow{
+    width: calc(350px * 1);
+    height: calc(283px * 1);
+    bottom: 7%;
+    left: 25%;
+}
+.frame5, .frame5shadow{
+    width: calc(250px * 0.65);
+    height: calc(362px * 0.65);
+    bottom: 10%;
+    right: 39%;
+}
+
+.frame6, .frame6shadow{
+    width: calc(400px * 0.8);
+    height: calc(487px * 0.8);
+    bottom: 7%;
+    right: 16%;
+}
+
+.key, .keyshadow{
+    width: calc(97px * 0.5);
+    height: calc(248px * 0.5);
+    top: 20%;
+    left: 8%;
+}
+
+.torchright, .torchrightshadow{
+    width: calc(250px * 0.64);
+    height: calc(490px * 0.64);
+    top: 30%;
+    right: 6%;
+}
+
+.torchleft, .torchleftshadow{
+    width: calc(350px * 0.82);
+    height: calc(378px * 0.82);
+    bottom: 5%;
+    left: 7%;
+}
+
+
+/* 썸네일 */
+.thumb0, .thumb1, .thumb2, .thumb3, .thumb4, .thumb5{
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumb0 img, .thumb1 img, .thumb2 img, .thumb3 img, .thumb4 img, .thumb5 img{
+    object-fit: contain;
+}
+.thumb0{
+    width: 10rem;
+    height: 10rem;
+    top: 50%;
+    left: 49%;
+    transform: translate(-49%, -49%);
+    z-index: 3;
+    animation: tongtong 1s linear infinite;
+    /* 1:1.47 */
+}
+@keyframes tongtong{
+    0%, 100%{
+        transform: translate(-49%, -49%) translateY(0) ;
+    }
+    55%{
+        transform: translate(-49%, -49%) translateY(-2%);
+    }
+}
+.thumb1{
+    width: 9rem;
+    height: 9rem;
+    top: 65%;
+    left: 49%;
+    transform: translate(-50%, -65%);
+    z-index: 3;
+    animation: tongtong1 1s linear infinite;
+    /* 1:1.47 */
+}
+@keyframes tongtong1{
+    0%, 100%{
+        transform: translate(-50%, -65%) translateY(0) ;
+    }
+    55%{
+        transform: translate(-50%, -65%) translateY(-2%);
+    }
+}
+.thumb2{
+    width: 8rem;
+    height: 8rem;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    animation: tongtong2 1s linear infinite;
+    /* 1:1.47 */
+}
+@keyframes tongtong2{
+    0%, 100%{
+        transform: translate(-50%, -50%) translateY(0) ;
+    }
+    55%{
+        transform: translate(-50%, -50%) translateY(-2%);
+    }
+}
+.thumb3{
+    width: 9rem;
+    height: 9rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    animation: tongtong2 1s linear infinite;
+    /* 1:1.47 */
+}
+
+.thumb4{
+    width: 7rem;
+    height: 7rem;
+    top: 56%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    animation: tongtong2 1s linear infinite;
+    /* 1:1.47 */
+}
+.thumb5{
+    width: 9rem;
+    height: 9rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    animation: tongtong2 1s linear infinite;
+    /* 1:1.47 */
+}
+/*푸터*/
+.collabfooter{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 1rem;
+    color: var(--color);
+    box-sizing: border-box;
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cong{
+    width: 1rem;
+    height: 1rem;
+    border: 0.094rem solid var(--color);
+    border-radius: 1rem;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collabloadbox{
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loadstar1, .loadstar2{
+    position: absolute;
+    width: calc(64px * 0.4);
+    height: calc(84px * 0.4);
+    animation: banzzak 1s step-end infinite;
+}
+.loadstar1{
+    top: 0;
+    left: 0;
+}
+.loadstar2{
+    bottom: 0;
+    right: 0;
+}
+@keyframes banzzak{
+    50%{
+        opacity: 0;
+    }
+}
+
+/*데스크탑 기본 줄이기*/
+@media screen and (min-width: 1367px) and (max-width:1600px) and (orientation: landscape){
+    .flower1{
+        left: 5%;
+    }
+    .frame0, .frame0shadow{
+        right: 7%;
+    }
+    
+    .frame1, .frame1shadow{
+        top: 15%;
+        left: 10%;
+        /* 1:1.2 */
+    }
+    .frame2, .frame2shadow{
+        left: 35%;
+        /*1:1.17*/
+    }
+    .frame3, .frame3shadow{
+        right: 22%;
+        /* 1:1.16 */
+    }
+    .frame4, .frame4shadow{
+        bottom: 10%;
+        left: 20%;
+        /* 1.23:1 */
+    }
+    .frame5, .frame5shadow{
+        bottom: 15%;
+        /*1:1.45*/
+    }
+    
+    .frame6, .frame6shadow{
+        right: 10%;
+        /* 1:1.22 */
+    }
+    
+    .key, .keyshadow{
+        left: 3%;
+        /* 1:2.56 */
+    }
+    .torchright, .torchrightshadow{
+        right: 0%;
+    }
+    .torchleft, .torchleftshadow{
+        bottom: 5%;
+        left: 0;
+        /* 1:1.1 */
+    }
+}
+/*아이패드프로, 데스크탑 줄이기*/
+@media screen and (max-width: 1366px) and (min-height: 821px) and (max-height: 1080px) and (orientation: landscape){
+    .flower1{
+        left: 5%;
+    }
+    .frame0, .frame0shadow{
+        width: calc(200px* 0.9);
+        height: calc(181px* 0.9);
+        right: 7%;
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.8);
+        height: calc(411px* 0.8);
+        top: 15%;
+        left: 10%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.76);
+        height: calc(469px* 0.76);
+        left: 35%;
+        top: 17%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.6);
+        height: calc(475px* 0.6);
+        right: 22%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 1.05);
+        height: calc(283px* 1.05);
+        bottom: 10%;
+        left: 23%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.7);
+        height: calc(362px* 0.7);
+        bottom: 15%;
+        right: 35%;
+    }
+    .frame6, .frame6shadow{
+        right: 8%;
+    }
+    .key, .keyshadow{
+        left: 3%;
+    }
+    .torchright, .torchrightshadow{
+        right: 0%;
+    }
+    .torchleft, .torchleftshadow{
+        bottom: 10%;
+        left: 0;
+    }
+    /* .modalimgbox{
+        width: 40rem;
+        height: auto;
+    } */
+    .modalsquareimgbox{
+        width: 80%;
+    }
+}
+/* 아이패드11프로 */
+@media screen and (max-width: 1194px) and (orientation: landscape){
+    .flower1{
+        left: 8%;
+    }
+    .frame0, .frame0shadow{
+        right: 2%;
+    }
+    
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.7);
+        height: calc(411px* 0.7);
+        top: 16%;
+        left: 15%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.62);
+        height: calc(469px* 0.62);
+        left: 39%;
+        top: 20%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.48);
+        height: calc(475px* 0.48);
+        right: 20%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 0.88);
+        height: calc(283px* 0.88);
+        left: 22%;
+        bottom: 10%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.64);
+        height: calc(362px* 0.64);
+        right: 33%;
+        bottom: 12%;
+    }
+    
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.64);
+        height: calc(487px* 0.64);
+        right: 7%;
+    }
+    
+    .key, .keyshadow{
+        width: calc(97px* 0.44);
+        height: calc(248px* 0.44);
+        left: 5%;
+    }
+    
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.38);
+        height: calc(490px* 0.38);
+        top: 35%;
+        right: 2%;
+        /* 1:2 */
+    }
+    
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.58);
+        height: calc(378px* 0.58);
+        left: 2%;
+        bottom: 15%;
+    }
+    .thumb0{
+        width: 8rem;
+        height: 8rem;
+    }
+    .thumb1, .thumb2, .thumb3, .thumb5{
+        width: 7rem;
+        height: 7rem;
+    }
+    /* .modalimgbox{
+        width: 40rem;
+        height: auto;
+    } */
+    .modalsquareimgbox{
+        width: 80%;
+    }
+}
+/* 아이패드 에어 */
+@media screen and (max-width: 1180px) and (orientation: landscape){
+    .flower1{
+        left: 8%;
+    }
+    .frame0, .frame0shadow{
+        right: 2%;
+    }
+    
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.7);
+        height: calc(411px* 0.7);
+        top: 16%;
+        left: 15%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.62);
+        height: calc(469px* 0.62);
+        left: 39%;
+        top: 20%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.48);
+        height: calc(475px* 0.48);
+        right: 20%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 0.88);
+        height: calc(283px* 0.88);
+        left: 22%;
+        bottom: 10%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.64);
+        height: calc(362px* 0.64);
+        right: 33%;
+        bottom: 12%;
+    }
+    
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.64);
+        height: calc(487px* 0.64);
+        right: 7%;
+    }
+    
+    .key, .keyshadow{
+        width: calc(97px* 0.44);
+        height: calc(248px* 0.44);
+        left: 5%;
+    }
+    
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.38);
+        height: calc(490px* 0.38);
+        top: 35%;
+        right: 2%;
+        /* 1:2 */
+    }
+    
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.58);
+        height: calc(378px* 0.58);
+        left: 2%;
+        bottom: 15%;
+    }
+    .thumb0{
+        width: 8rem;
+        height: 8rem;
+    }
+    .thumb1, .thumb2, .thumb3, .thumb5{
+        width: 7rem;
+        height: 7rem;
+    }
+    /* .modalimgbox{
+        width: 35rem;
+        height: auto;
+    } */
+    .modalsquareimgbox{
+        width: 80%;
+    }
+}
+/*아이패드기본, 미니*/
+@media screen and (max-width: 1024px) and (max-height: 768px) and (orientation: landscape){
+    .flower1{
+        left: 8%;
+    }
+    .frame0, .frame0shadow{
+        right: 2%;
+    }
+    
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.6);
+        height: calc(411px* 0.6);
+        top: 20%;
+        left: 15%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.52);
+        height: calc(469px* 0.52);
+        left: 39%;
+        top: 25%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.44);
+        height: calc(475px* 0.44);
+        right: 20%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 0.82);
+        height: calc(283px* 0.82);
+        left: 22%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.58);
+        height: calc(362px* 0.58);
+        right: 33%;
+    }
+    
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.64);
+        height: calc(487px* 0.64);
+        right: 5%
+    }
+    
+    .key, .keyshadow{
+        width: calc(97px* 0.42);
+        height: calc(248px* 0.42);
+        left: 5%;
+    }
+    
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.32);
+        height: calc(490px* 0.32);
+        top: 35%;
+        right: 2%;
+        /* 1:2 */
+    }
+    
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.52);
+        height: calc(378px* 0.52);
+        left: 2%;
+        bottom: 15%;
+    }
+    .thumb0{
+        width: 8rem;
+        height: 8rem;
+    }
+    .thumb1, .thumb2, .thumb3, .thumb5{
+        width: 7rem;
+        height: 7rem;
+    }
+    /* .modalimgbox{
+        width: 35rem;
+        height: auto;
+    } */
+    .modalsquareimgbox{
+        width: 80%;
+    }
+}
+/*아이패드프로*/
+@media screen and (min-width: 1024px) and (max-width:1137px) and (orientation: portrait) {
+    .flower2{
+        bottom: 28%;
+    }
+    .frame0, .frame0shadow{
+        width: calc(200px* 1.14);
+        height: calc(181px* 1.14);
+        right: 1%;
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.78);
+        height: calc(411px* 0.78);
+        top: 12%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.76);
+        height: calc(469px* 0.76);
+        top: 16%;
+        left: 50%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.6);
+        height: calc(475px* 0.6);
+        top: 40%;
+        right: 70%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px * 1);
+        height: calc(283px * 1);
+        bottom: 0;
+        left: 35%;
+        top: 45%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px * 0.86);
+        height: calc(362px * 0.86);
+        bottom: 20%;
+        right: 5%;
+    }
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.66);
+        height: calc(487px* 0.66);
+        bottom: 5%;
+        right: 38%;
+    }
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.5);
+        height: calc(490px* 0.5);
+        top: 35%;
+        right: 3%;
+    }
+    .torchleft, .torchleftshadow{
+        bottom: 12%;
+        left: 0;
+    }
+    .key, .keyshadow{
+        width: calc(97px* 0.6);
+        height: calc(248px* 0.6);
+    }
+    .modalcontents{
+        width: 90%;
+    }
+    .modalsquareimgbox{
+        width: 70%;
+    }
+}
+/* 아이패드프로 11 */
+@media screen and (max-width:834px) and (orientation: portrait){
+    .flower2{
+        bottom: 28%;
+    }
+    .frame0, .frame0shadow{
+        width: calc(200px * 1);
+        height: calc(181px * 1);
+        right: 1%;
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.7);
+        height: calc(411px* 0.7);
+        top: 12%;
+        left: 10%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.6);
+        height: calc(469px* 0.6);
+        left: 45%;
+        top: 16%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.5);
+        height: calc(475px* 0.5);
+        top: 40%;
+        right: 70%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px * 1);
+        height: calc(283px * 1);
+        bottom: 0;
+        left: 35%;
+        top: 42%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px * 0.72);
+        height: calc(362px * 0.72);
+        bottom: 20%;
+        right: 5%;
+    }
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.6);
+        height: calc(487px* 0.6);
+        bottom: 7%;
+        right: 38%;
+    }
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.4);
+        height: calc(490px* 0.4);
+        top: 35%;
+        right: 3%;
+    }
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.7);
+        height: calc(378px* 0.7);
+        bottom: 12%;
+        left: 0;
+    }
+    .key, .keyshadow{
+        width: calc(97px* 0.5);
+        height: calc(248px* 0.5);
+        left: 3%;
+    }
+    .thumb2{
+        width: 7rem;
+        height: 7rem;
+    }
+    .modalcontents{
+        width: 90%;
+    }
+    /* .modalimgbox{
+        width: 35rem;
+        height: auto;
+    } */
+}
+/* 아이패드에어 */
+@media screen and (max-width:820px) and (orientation: portrait){
+    .frame0, .frame0shadow{
+        width: calc(200px * 1);
+        height: calc(181px * 1);
+        right: 1%;
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.7);
+        height: calc(411px* 0.7);
+        top: 12%;
+        left: 10%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.6);
+        height: calc(469px* 0.6);
+        left: 45%;
+        top: 16%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.55);
+        height: calc(475px* 0.55);
+        top: 40%;
+        right: 65%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px * 1);
+        height: calc(283px * 1);
+        bottom: 0;
+        left: 40%;
+        top: 43%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px * 0.72);
+        height: calc(362px * 0.72);
+        bottom: 17%;
+        right: 5%;
+    }
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.6);
+        height: calc(487px* 0.6);
+        bottom: 7%;
+        right: 38%;
+    }
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.4);
+        height: calc(490px* 0.4);
+        top: 35%;
+        right: 3%;
+    }
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.7);
+        height: calc(378px* 0.7);
+        bottom: 12%;
+        left: 0;
+    }
+    .key, .keyshadow{
+        width: calc(97px* 0.5);
+        height: calc(248px* 0.5);
+        left: 3%;
+    }
+    .thumb2{
+        width: 7rem;
+        height: 7rem;
+    }
+    .modalcontents{
+        width: 90%;
+    }
+    /* .modalimgbox{
+        width: 35rem;
+        height: auto;
+    } */
+}
+/*아이패드기본, 미니*/
+@media screen and (max-width: 819px) and (orientation: portrait){
+    .frame0, .frame0shadow{
+        width: calc(200px * 0.9);
+        height: calc(181px * 0.9);
+        right: 1%;
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.63);
+        height: calc(411px* 0.63);
+        top: 12%;
+        left: 12%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.55);
+        height: calc(469px* 0.55);
+        left: 45%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.5);
+        height: calc(475px* 0.5);
+        top: 40%;
+        right: 65%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px * 0.85);
+        height: calc(283px * 0.85);
+        bottom: 0;
+        left: 45%;
+        top: 44%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px * 0.6);
+        height: calc(362px * 0.6);
+        bottom: 15%;
+        right: 5%;
+    }
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.52);
+        height: calc(487px* 0.52);
+        bottom: 7%;
+        right: 40%;
+    }
+    .key, .keyshadow{
+        left: 5%;
+    }
+    .torchright, .torchrightshadow{
+        top: 32%;
+        right: 3%;
+    }
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.6);
+        height: calc(378px* 0.6);
+        bottom: 12%;
+        left: 0;
+    }
+    .thumb0{
+        width: 8rem;
+        height: 8rem;
+    }
+    .thumb2, .thumb3, .thumb5{
+        width: 7rem;
+        height: 7rem;
+    }
+    .modalcontents{
+        width: 90%;
+    }
+    /* .modalimgbox{
+        width: 35rem;
+        height: auto;
+    } */
+}
+@media screen and (max-width:710px) and (orientation:portrait){
+    /*모달*/
+    .modalcontents{
+        width: 93%;
+        box-shadow: 0 0 5px 5px beige;
+    }
+    .modalcontitle{
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+    }
+    .modalflower{
+        width: 2rem;
+        height: 2rem;
+    }
+    .modalcondesc{
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+    }
+    .modalimgbox{
+        width: 95%;
+        height: auto;
+    }
+    .modalsquareimgbox{
+        width: 90%;
+    }
+    /*요소*/
+    .flower0{
+        top: 38%;
+        left: 65%;
+    }
+    
+    .flower1{
+        top: 68%;
+        left: 3%;
+    }
+    
+    .flower2{
+        bottom: 0rem;
+        top: 90%;
+        left: 55%;
+    }
+    
+    .flower3{
+        top: 125%;
+        bottom: 0rem;
+        right: 2%;
+    }
+    .frame0{
+        width: calc(200px* 0.9);
+        height: calc(181px* 0.9);
+        top: 15%;
+        right: 0;
+    }
+    
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.58);
+        height: calc(411px* 0.58);
+        top: 20%;
+        left: 2%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.55);
+        height: calc(469px* 0.55);
+        top: 60%;
+        left: 47%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.52);
+        height: calc(475px* 0.52);
+        top: 85%;
+        right: 0;
+        left: 2%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 0.96);
+        height: calc(283px* 0.96);
+        bottom: 0;
+        top: 115%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.7);
+        height: calc(362px* 0.7);
+        bottom: 0;
+        top: 145%;
+        right: 0;
+        left: 4%;
+    }
+    
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.52);
+        height: calc(487px* 0.52);
+        top: 155%;
+        bottom: 0;
+        right: 0;
+    }
+    
+    .key, .keyshadow{
+        width: calc(97px* 0.41);
+        height: calc(248px* 0.41);
+        top: 45%;
+        left: 80%;
+    }
+    
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.35);
+        height: calc(490px* 0.35);
+        top: 97%;
+        right: 8%;
+    }
+    
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.58);
+        height: calc(378px* 0.58);
+        top: 54%;
+        bottom: 0;
+        left: 2%;
+    }
+    .thumb0, .thumb1, .thumb2, .thumb5{
+        width: 7rem;
+        height: 7rem;
+    }
+    .collabfooter{
+        top: 190%;
+    }
+    .collabloadbox{
+        width: 4rem;
+        height: 4rem;
+    }
+    .modalconbox{
+        min-height: 70%;
+        align-items: center;
+    }
+    .modalconimgbox{
+        min-height: 0rem;
+    }
+}
+
+@media screen and (max-width:390px) and (orientation:portrait){
+    /*요소*/
+    .flower2{
+        top: 100%;
+    }
+    .flower3{
+        top: 135%;
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.53);
+        height: calc(411px* 0.53);
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.5);
+        height: calc(469px* 0.5);
+        left: 48%;
+        top: 60%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.48);
+        height: calc(475px* 0.48);
+        top: 80%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 0.9);
+        height: calc(283px* 0.9);
+        top: 110%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.6);
+        height: calc(362px* 0.6);
+        top: 140%;
+        left: 2%;
+    }
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.52);
+        height: calc(487px* 0.52);
+        top: 152%;
+        bottom: 0;
+        right: 0;
+    }
+    
+    .key, .keyshadow{
+        top: 45%;
+        left: 78%;
+    }
+    
+    .torchright, .torchrightshadow{
+        top: 90%;
+    }
+    
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.55);
+        height: calc(378px* 0.55);
+        top: 50%;
+        left: 0%;
+    }
+    .collabfooter{
+        top: 190%;
+    }
+}
+@media screen and (max-width:375px) and (orientation:portrait){
+    /*모달*/
+    .xbtn{
+        padding-top: 0.5rem;
+        font-size: 1.5rem;
+    }
+    /*요소*/
+    .flower0{
+        top: 45%;
+    }
+    
+    .flower1{
+        top: 80%;
+    }
+    
+    .flower2{
+        top: 115%;
+    }
+    
+    .flower3{
+        top: 165%;
+    }
+    .frame0, .frame0shadow{
+        width: calc(200px* 0.86);
+        height: calc(181px* 0.86);
+        top: 17%;
+    }
+    
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.5);
+        height: calc(411px* 0.5);
+        top: 25%;
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.45);
+        height: calc(469px* 0.45);
+        top: 70%;
+        left: 52%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.45);
+        height: calc(475px* 0.45);
+        top: 100%;
+    }
+    .frame4, .frame4shadow{
+        top: 133%;
+    }
+    .frame5, .frame5shadow{
+        top: 170%;
+        left: 0%;
+    }
+    
+    .frame6, .frame6shadow{
+        top: 185%;
+    }
+    
+    .key, .keyshadow{
+        top: 52%;
+        left: 80%;
+    }
+    
+    .torchright, .torchrightshadow{
+        top: 110%;
+        right: 10%;
+    }
+    
+    .torchleft, .torchleftshadow{
+        top: 60%;
+    }
+    .collabfooter{
+        top: 230%;
+    }
+    .collabloadbox{
+        width: 3rem;
+        height: 3rem;
+    }
+    .loadstar1, .loadstar2{
+        width: calc(64px * 0.3);
+        height: calc(84px * 0.3);
+    }
+    /* .modalimgbox{
+        width: 19rem;
+        height: auto;
+    } */
+    .modalconbox{
+        min-height: 80%;
+    }
+
+}
+@media screen and (max-width:320px) and (orientation:portrait){
+    /*모달*/
+    /* .modalimgbox{
+        width: 16rem;
+        height: auto;
+    } */
+    /*요소*/
+    .flower2{
+        top: 100%;
+    }
+    .flower3{
+        top: 135%;
+    }
+    .frame0, .frame0shadow{
+        width: calc(200px* 0.7);
+        height: calc(181px* 0.7);
+    }
+    .frame1, .frame1shadow{
+        width: calc(350px* 0.48);
+        height: calc(411px* 0.48);
+    }
+    .frame2, .frame2shadow{
+        width: calc(400px* 0.4);
+        height: calc(469px* 0.4);
+        left: 48%;
+        top: 60%;
+    }
+    .frame3, .frame3shadow{
+        width: calc(400px* 0.4);
+        height: calc(475px* 0.4);
+        top: 85%;
+    }
+    .frame4, .frame4shadow{
+        width: calc(350px* 0.8);
+        height: calc(283px* 0.8);
+        top: 115%;
+    }
+    .frame5, .frame5shadow{
+        width: calc(250px* 0.5);
+        height: calc(362px* 0.5);
+        top: 145%;
+        left: 2%;
+    }
+    .frame6, .frame6shadow{
+        width: calc(400px* 0.48);
+        height: calc(487px* 0.48);
+        top: 160%;
+        bottom: 0;
+        right: 0;
+    }
+    
+    .key, .keyshadow{
+        width: calc(97px* 0.35);
+        height: calc(248px* 0.35);
+        top: 45%;
+        left: 78%;
+    }
+    
+    .torchright, .torchrightshadow{
+        width: calc(250px* 0.3);
+        height: calc(490px* 0.3);
+        top: 90%;
+    }
+    
+    .torchleft, .torchleftshadow{
+        width: calc(350px* 0.45);
+        height: calc(378px* 0.45);
+        top: 55%;
+        left: 0%;
+    }
+    .collabfooter{
+        top: 200%;
+    }
+
+}
