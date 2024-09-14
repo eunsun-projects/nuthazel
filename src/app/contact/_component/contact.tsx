@@ -212,6 +212,7 @@ export default function ContactPage() {
                 fill
                 onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
+                unoptimized
               />
             </div>
           );
