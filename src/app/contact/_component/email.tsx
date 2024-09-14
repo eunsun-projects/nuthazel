@@ -131,7 +131,6 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
 
   return (
     <>
-      {/* {sendImg && <CanvasComp/>} */}
       <div className={styles.contactbox}>
         <div ref={foldRef} className={`${styles.formtwo} ${folding}`}></div>
         <div ref={formdivRef} className={`${styles.formandlink} ${hideForm}`}>
