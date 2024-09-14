@@ -158,7 +158,7 @@ export default function ToonPage({ toon }: ToonPageProps) {
       <div
         className={styles.page}
         style={{
-          opacity: isLoading ? "1" : "0",
+          opacity: isLoading ? "0" : "1",
           backgroundImage: gridPage
             ? "url(/assets/toon/background/poketback.webp)"
             : "none",
