@@ -21,7 +21,7 @@ export async function GET(){
         const firestore = adminReady.firestore(); // 파이어베이스 초기화
 
         const nuthazelCollection = await firestore.collection('nuthazelall').where("isPublic", "==", true).orderBy("num", "desc").get(); //
-        const nuthazelData = nuthazelCollection.docs.map((doc) => {
+        const nuthazelData = nuthazelCollection.docs.map((doc: FirebaseFirestore.QueryDocumentSnapshot) => {
             return doc.data();
         });
 
@@ -32,7 +32,7 @@ export async function GET(){
 
         return Response.json(responseObject, {status :200});
 
-    } catch (error) {
+    } catch (error:any) {
         console.log('흠...무서워서 원', error.message);
 
         return Response.json({ message: error.message}, {status: 400});

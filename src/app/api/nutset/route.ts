@@ -1,8 +1,17 @@
-import { headers } from "next/headers";
-import { ref, uploadBytes, deleteObject, getDownloadURL } from "firebase/storage";
+import { auth, storage } from '@/app/firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { storage, auth } from '@/app/firebaseConfig';
+import { getDownloadURL, ref, uploadBytes, UploadMetadata } from "firebase/storage";
+import { headers } from "next/headers";
 import adminReady from "../../../firebase/admin";
+
+// At the top of the file, add this interface
+interface MetaData {
+    [key: string]: any;
+    keywords?: string[];
+    num?: number;
+    isPublic?: boolean;
+    link?: { title: string; href?: string };
+}
 
 const random = (length = 6) => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -16,7 +25,7 @@ const random = (length = 6) => {
 
 };
 
-async function putStorageItem(item, folder, index){
+async function putStorageItem(item:File, folder:string, index:number){
     // const bytes = await item.arrayBuffer();
     // const buffer = Buffer.from(bytes);
 
@@ -31,11 +40,13 @@ async function putStorageItem(item, folder, index){
         }
     };
 
-    const snapshot = uploadBytes(reference, item, metadata);
+    const snapshot = uploadBytes(reference, item, metadata as unknown as UploadMetadata);
     return snapshot;
 };
 
-export async function POST(request){
+
+
+export async function POST(request:Request){
 
     try{
         // 요청 본문 파싱 - formdata 그대로 일때
@@ -44,7 +55,7 @@ export async function POST(request){
         const req = await request.formData();
 
         const files = [];
-        const metaData = {};
+        const metaData: MetaData = {};
         let oldTitle = '';
         let actionType = '';
         for(let [key, value] of req.entries()) {
@@ -54,29 +65,32 @@ export async function POST(request){
                 files.push(value);
             // 키가 keywords 면 keywords : [값 배열]
             }else if(key === 'keywords'){
-                metaData[key] = value.split(',');
+                metaData[key] = (value as string).split(',');
             // 키가 num 이면 num : 넘버
             }else if(key === 'num'){
                 metaData[key] = Number(value);
             // 키가 oldTitle 이면 oldtitle 용 변수에 oldtitle 할당 (주의! 얘는 파이어베이스에 보낼 객체 설정 하는애가 아님!!!)
             }else if(key === 'oldtitle'){
-                oldTitle = value;
+                oldTitle = (value as string);
             // 키가 isPublic 이면 isPublic : boolean
             }else if(key === 'isPublic'){
                 metaData[key] = value === 'true' ? true : false;
             // 키가 link 관련일때 처리
             }else if(key === 'linktitle'){
                 metaData['link'] = {
-                    title : value
-                }
+                    title: value as string
+                };
             }else if(key === 'linkhref'){
-                metaData['link'].href = value;
+                metaData['link'] = {
+                    title: metaData['link']?.title || '',  // Ensure title is always set
+                    href: value as string
+                };
             // 키가 action 이 아니면 === 즉 나머지 모두 해당(키가 무엇이든 간에) 해당키 : 값
             }else if(key !== 'action'){
                 metaData[key] = value;
             // 바로위 if 문의 예외상황 === 즉 키가 action 일때
             }else{
-                actionType = value;
+                actionType = (value as string);
             }
         };
 
@@ -94,7 +108,7 @@ export async function POST(request){
             return Response.json({message: '요청 헤더 토큰 확인하세요'} , {status: 401})
         }
 
-        const userCredential = await signInWithEmailAndPassword(auth, process.env.NEXT_PUBLIC_SCREEN_MAIL, process.env.NEXTAUTH_SECRET);
+        const userCredential = await signInWithEmailAndPassword(auth, process.env.NEXT_PUBLIC_SCREEN_MAIL as string, process.env.NEXTAUTH_SECRET as string);
 
         if(!userCredential.user.uid){
             return Response.json({message: '파이어베이스 로그인 안되서 실패'} , {status: 401});
@@ -118,7 +132,7 @@ export async function POST(request){
             metaData.time = new Date();
 
             // promise.all 을 사용해서 putStorageItem 을 files 의 수만큼 돌려 돌려~ 이러면 resolve 를 보장받을 수 있음
-            const snapshots = await Promise.all(files.map((item, index) => putStorageItem(item, category, index))); // pusStorageItem 이 promise 를 리턴해야함
+            const snapshots = await Promise.all(files.map((item, index) => putStorageItem(item as File, category, index))); // pusStorageItem 이 promise 를 리턴해야함
             // 위에서 만든 snapshots 를 또 promise.all 해서 getDownloadURL~~~ .ref 를 파라미터로 넣어줘야함!
             const urls = await Promise.all(snapshots.map((e) => getDownloadURL(e.ref)));
             // urls 에는 파이어베이스 스토리지에 업로드 된 webp 들의 실제 주소가 배열로 담겨있음!
@@ -127,7 +141,7 @@ export async function POST(request){
             // console.log(metaData);
 
             // 이왕이면 트랜젝션으로! 하나씩 순서대로 겹치지 않게 처리되게끔!
-            await firestore.runTransaction(async (transaction) => {
+            await firestore.runTransaction(async (transaction:any) => {
                 const docRef = firestore.collection('nuthazelall').doc(); // 새 문서 참조 생성
                 transaction.set(docRef, metaData); // 새 문서에 데이터 쓰기
 
@@ -143,7 +157,7 @@ export async function POST(request){
 
             // 여기에 이미지는 추가 안할 것을 생각해서 if 문 추가할 것??
             // promise.all 을 사용해서 putStorageItem 을 files 의 수만큼 돌려 돌려~ 이러면 resolve 를 보장받을 수 있음
-            const snapshots = await Promise.all(files.map((item, index) => putStorageItem(item, category, index))); // pusStorageItem 이 promise 를 리턴해야함
+            const snapshots = await Promise.all(files.map((item, index) => putStorageItem(item as File, category, index))); // pusStorageItem 이 promise 를 리턴해야함
             // 위에서 만든 snapshots 를 또 promise.all 해서 getDownloadURL~~~ .ref 를 파라미터로 넣어줘야함!
             const urls = await Promise.all(snapshots.map((e) => getDownloadURL(e.ref)));
             // urls 에는 파이어베이스 스토리지에 업로드 된 webp 들의 실제 주소가 배열로 담겨있음!
@@ -163,8 +177,8 @@ export async function POST(request){
 
                 return Response.json({message : `성공 횟수 ${urls.length} 회`}, {status: 200}); //
 
-            }catch(error){
-                throw new Error(error);
+            }catch(error:any){
+                throw new Error(error.message);
             }
 
         }else if(actionType === 'toondelete' || actionType === 'illustdelete' || actionType === 'collabdelete'){
@@ -188,8 +202,8 @@ export async function POST(request){
                     const allCategorizedSnapshot = await firestore.collection('nuthazelall').where('category', '==', category).get(); 
                     if (!allCategorizedSnapshot.empty) {
                         const sortedDocs = allCategorizedSnapshot.docs
-                            .map(doc => ({ id: doc.id, num: doc.data().num }))
-                            .sort((a, b) => a.num - b.num); // num 기준으로 정렬
+                            .map((doc : FirebaseFirestore.QueryDocumentSnapshot) => ({ id: doc.id, num: doc.data().num }))
+                            .sort((a : any, b : any) => a.num - b.num); // num 기준으로 정렬
                         
                         // num 재정렬
                         for (let i = 0; i < sortedDocs.length; i++) {
@@ -204,24 +218,15 @@ export async function POST(request){
                 }
                 return Response.json({message : `삭제 성공`}, {status: 200}); //
 
-            }catch(error){
+            }catch(error:any){
                 console.error("Error handling documents: ", error);
-                throw new Error(error);
+                throw new Error(error.message);
             }
         }
 
         
-    }catch(error){
-
+    }catch(error:any){
         console.log('흠...무서워서 원', error.message)
-
         return Response.json({message: error.message} , {status: 401})
     }
 }
-
-// const files = [];
-// // Display the values
-// for (const value of req.values()) {
-//     files.push(value);
-// }
-// const files = req.get('file');
