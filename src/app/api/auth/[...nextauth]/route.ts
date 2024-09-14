@@ -1,13 +1,13 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
-import { cert } from "firebase-admin/app"
+import { cert, ServiceAccount } from "firebase-admin/app"
 import * as token from '../../../../../nuthazel-firebase-key.json'
 
 export const authOptions = {
     // Configure one or more authentication providers
     adapter: FirestoreAdapter({
-        credential: cert(token)
+        credential: cert(token as ServiceAccount)
     }),
 	providers: [
         GoogleProvider({
