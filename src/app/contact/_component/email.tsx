@@ -39,14 +39,14 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
 
     try {
       if (
-        !formRef.current.name ||
+        !formRef.current.name01 ||
         !formRef.current.email ||
         !formRef.current.message
       ) {
         alert("모든 필드를 입력해 주세요.");
         return;
       }
-      const name = sanitizeInput(formRef.current.name);
+      const name = sanitizeInput(formRef.current.name01.value);
       const email = formRef.current.email.value;
       if (!validateEmail(email)) {
         alert("이메일 주소를 확인해 주세요. @, . 이 빠졌나..");
@@ -122,10 +122,10 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
             }
           }, 6300);
         })
-        .catch((err) => console.log(err));
-    } catch (error) {
+        .catch((err: any) => console.log(err.message));
+    } catch (error: any) {
       // alert('메일 전송에 실패하였습니다.');
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -171,7 +171,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  name="name01"
                   // required
                 />
 
