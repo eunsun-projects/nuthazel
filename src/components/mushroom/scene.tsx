@@ -35,20 +35,20 @@ export default function Scene({ classification, handleClick }: SceneProps) {
       />
 
       <pointLight
-        intensity={0.2}
-        shadow-mapSize-width={4096}
-        shadow-mapSize-height={4096}
+        intensity={20}
+        // shadow-mapSize-width={4096}
+        // shadow-mapSize-height={4096}
         distance={0}
         decay={2}
         shadow-radius={10}
         shadow-bias={-0.0001}
-        position={[0, 150, 0]}
+        position={[0, 10, 0]}
         castShadow
       />
 
       <hemisphereLight
         name="Default Ambient Light"
-        intensity={1}
+        intensity={2}
         // color={'pink'}
         // groundColor={'yellow'}
         // color="#eaeaea"
