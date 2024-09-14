@@ -17,6 +17,7 @@
     "@vercel/analytics": "^1.2.2",
     "env-cmd": "^10.1.0",
     "firebase": "^10.7.2",
+    "firebase-admin": "^12.5.0",
     "next": "14.2.11",
     "next-auth": "^4.24.5",
     "pure-react-carousel": "^1.30.1",
