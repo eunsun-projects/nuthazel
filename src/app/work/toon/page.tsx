@@ -47,7 +47,7 @@ export default async function Toon() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <ToonPage toon={result} />
+      {result && <ToonPage toon={result} />}
     </Suspense>
   );
 }
