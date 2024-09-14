@@ -13,7 +13,7 @@ export default function Footer() {
       ref={footRef}
       className={styles.footer}
       style={{
-        backgroundColor: pathname !== "/" ? "transparent" : "#eee7d1",
+        backgroundColor: "transparent",
         justifyContent: "space-between",
         display:
           pathname === "/about" ||
