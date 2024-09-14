@@ -1,5 +1,7 @@
-import adminReady from "../../../firebase/admin";
+import { QueryDocumentSnapshot } from "firebase-admin/firestore";
 import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import adminReady from "../../../firebase/admin";
 
 export const dynamic = 'force-dynamic';
 
@@ -15,13 +17,13 @@ export async function GET(){
 
         // 토큰 검증 로직 (예: 환경 변수에 저장된 토큰과 비교)
         if (!token || token !== process.env.POST_TOKEN) {
-            return Response.json({message: '요청 헤더 토큰 확인하세요'} , {status: 401})
+            return NextResponse.json({message: '요청 헤더 토큰 확인하세요'} , {status: 401})
         }
 
         const firestore = adminReady.firestore(); // 파이어베이스 초기화
 
         const nuthazelCollection = await firestore.collection('nuthazelall').where("isPublic", "==", true).orderBy("num", "desc").get(); //
-        const nuthazelData = nuthazelCollection.docs.map((doc: FirebaseFirestore.QueryDocumentSnapshot) => {
+        const nuthazelData = nuthazelCollection.docs.map((doc: QueryDocumentSnapshot) => {
             return doc.data();
         });
 
@@ -30,12 +32,12 @@ export async function GET(){
             nuthazelall : nuthazelData,
         }
 
-        return Response.json(responseObject, {status :200});
+        return NextResponse.json(responseObject, {status :200});
 
     } catch (error:any) {
         console.log('흠...무서워서 원', error.message);
 
-        return Response.json({ message: error.message}, {status: 400});
+        return NextResponse.json({ message: error.message}, {status: 400});
 
     }
 }

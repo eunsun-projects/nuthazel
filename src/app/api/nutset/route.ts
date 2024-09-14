@@ -1,7 +1,8 @@
 import { auth, storage } from '@/app/firebaseConfig';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes, UploadMetadata } from "firebase/storage";
 import { headers } from "next/headers";
+import { NextResponse } from 'next/server';
 import adminReady from "../../../firebase/admin";
 
 // At the top of the file, add this interface
@@ -105,13 +106,13 @@ export async function POST(request:Request){
 
         // 토큰 검증 로직 (예: 환경 변수에 저장된 토큰과 비교)
         if (!token || token !== process.env.POST_TOKEN) {
-            return Response.json({message: '요청 헤더 토큰 확인하세요'} , {status: 401})
+            return NextResponse.json({message: '요청 헤더 토큰 확인하세요'} , {status: 401})
         }
 
         const userCredential = await signInWithEmailAndPassword(auth, process.env.NEXT_PUBLIC_SCREEN_MAIL as string, process.env.NEXTAUTH_SECRET as string);
 
         if(!userCredential.user.uid){
-            return Response.json({message: '파이어베이스 로그인 안되서 실패'} , {status: 401});
+            return NextResponse.json({message: '파이어베이스 로그인 안되서 실패'} , {status: 401});
         };
 
         const firestore = adminReady.firestore();
@@ -148,7 +149,7 @@ export async function POST(request:Request){
                 console.log(docRef.id);
             });
 
-            return Response.json({message : `성공 횟수 ${urls.length} 회`}, {status: 200}); //
+            return NextResponse.json({message : `성공 횟수 ${urls.length} 회`}, {status: 200}); //
 
         }else if(actionType === 'toonupdate' || actionType === 'illustupdate' || actionType === 'collabupdate'){
 
@@ -175,7 +176,7 @@ export async function POST(request:Request){
                     await docRef.update(metaData); // 새 문서에 데이터 쓰기
                 }
 
-                return Response.json({message : `성공 횟수 ${urls.length} 회`}, {status: 200}); //
+                return NextResponse.json({message : `성공 횟수 ${urls.length} 회`}, {status: 200}); //
 
             }catch(error:any){
                 throw new Error(error.message);
@@ -216,7 +217,7 @@ export async function POST(request:Request){
                         console.log("Reordered numbers successfully!");
                     }
                 }
-                return Response.json({message : `삭제 성공`}, {status: 200}); //
+                return NextResponse.json({message : `삭제 성공`}, {status: 200}); //
 
             }catch(error:any){
                 console.error("Error handling documents: ", error);
@@ -227,6 +228,6 @@ export async function POST(request:Request){
         
     }catch(error:any){
         console.log('흠...무서워서 원', error.message)
-        return Response.json({message: error.message} , {status: 401})
+        return NextResponse.json({message: error.message} , {status: 401})
     }
 }
