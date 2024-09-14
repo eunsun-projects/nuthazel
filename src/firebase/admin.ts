@@ -1,23 +1,22 @@
-
-import admin from 'firebase-admin';
+import admin, { ServiceAccount } from "firebase-admin";
 import * as token from "../../nuthazel-firebase-key.json";
 
-let adminInstance;
+let adminInstance: admin.app.App;
 
 async function initFirebase() {
-    if (!adminInstance) {
-        if (admin.apps.length === 0) {
-            admin.initializeApp({
-                credential: admin.credential.cert(token, 'nuthazel-d445c'),
-                storageBucket: 'gs://nuthazel-d445c.appspot.com'
-            });
-            console.log('nuthazel Initialized new');
-        } else {
-            console.log('Firebase already initialized');
-        }
-        adminInstance = admin;
+  if (!adminInstance) {
+    if (admin.apps.length === 0) {
+      adminInstance = admin.initializeApp({
+        credential: admin.credential.cert(token as ServiceAccount),
+        storageBucket: "gs://nuthazel-d445c.appspot.com",
+      });
+      console.log("nuthazel Initialized new");
+    } else {
+      adminInstance = admin.app();
+      console.log("Firebase already initialized");
     }
-    return adminInstance;
+  }
+  return adminInstance;
 }
 
 const adminReady = await initFirebase();
@@ -28,7 +27,7 @@ export default adminReady;
 // import * as token from "../../vanko-firebase-key.json"
 
 // async function init(){
-    
+
 //     try {
 
 //         // 1. ↓ 로그인 된 앱이 없다면
@@ -79,7 +78,7 @@ export default adminReady;
 // const alreadyCreatedAps = getApps();
 
 // let app;
-// 
+//
 // if(alreadyCreatedAps.length === 0){
 //     console.log('없다면?')
 
