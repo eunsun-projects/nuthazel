@@ -55,7 +55,7 @@ export default async function IllustPage() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <Illust illust={result} />
+      {result && <Illust illust={result} />}
     </Suspense>
   );
 }
