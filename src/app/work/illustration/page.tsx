@@ -6,7 +6,6 @@ import { Suspense } from "react";
 import Illust from "./_component/illust";
 
 export const metadata = basicMeta;
-
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -14,6 +13,8 @@ export const viewport = {
   userScalable: false,
   // viewportFit : "cover"
 };
+
+export const dynamic = "force-dynamic";
 
 async function getData() {
   try {
