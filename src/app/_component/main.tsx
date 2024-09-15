@@ -70,7 +70,7 @@ const assetimg = [
   // 꽃
   ["/assets/main/flower2.webp", "flower"],
   //텍스처
-  ["/assets/main/texture.webp", "texture"],
+  // ["/assets/main/texture.webp", "texture"],
 ];
 const smokeimg = [
   //연기
@@ -245,7 +245,15 @@ export default function Main() {
               style={{ position: "absolute" }}
             >
               {e[2] ? (
-                <Link href={e[2]} prefetch={false}>
+                <Link
+                  href={e[2]}
+                  prefetch={false}
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
                   <Image
                     priority
                     src={e[0]}
@@ -277,7 +285,15 @@ export default function Main() {
               className={styles[e[1]]}
               style={{ position: "absolute" }}
             >
-              <Link href={e[2]} prefetch={false}>
+              <Link
+                href={e[2]}
+                prefetch={false}
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
                 <Image
                   priority
                   src={e[0]}

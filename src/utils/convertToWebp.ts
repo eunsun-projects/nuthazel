@@ -3,7 +3,7 @@ export default function convertToWebP(
   maxWidth: number,
   maxHeight: number,
   isSecond = false
-) {
+): Promise<File> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
