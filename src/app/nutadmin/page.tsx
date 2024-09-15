@@ -10,7 +10,7 @@ import ToHome from "./_component/toHome";
 export const metadata = basicMeta;
 export const viewport = basicViewport;
 
-export async function getData(session: Session) {
+async function getData(session: Session) {
   const isAdmin =
     session &&
     (session.user?.email === process.env.NEXT_PUBLIC_SCREEN_MAIL ||

@@ -8,7 +8,7 @@ import { Suspense } from "react";
 export const metadata = basicMeta;
 export const viewport = basicViewport;
 
-export async function getData() {
+async function getData() {
   try {
     const req = {
       method: "GET",

@@ -15,7 +15,7 @@ export const viewport = {
   // viewportFit : "cover"
 };
 
-export async function getData() {
+async function getData() {
   try {
     const req = {
       method: "GET",
