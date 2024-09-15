@@ -1,7 +1,7 @@
 import { basicMeta, basicViewport } from "@/app/basicmeta";
+import { authOptions } from "@/nextAuth/authOptions";
 import { getServerSession, Session } from "next-auth";
 import Config from "../../config/config.export";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { NutHazelResponse } from "../api/nutget/route";
 import AdminMain from "./_component/admin-main";
 import Login from "./_component/login";
@@ -10,7 +10,7 @@ import ToHome from "./_component/toHome";
 export const metadata = basicMeta;
 export const viewport = basicViewport;
 
-export async function getData(session: Session) {
+async function getData(session: Session) {
   const isAdmin =
     session &&
     (session.user?.email === process.env.NEXT_PUBLIC_SCREEN_MAIL ||

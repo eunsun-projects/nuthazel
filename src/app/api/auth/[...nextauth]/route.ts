@@ -1,24 +1,5 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google";
-import { FirestoreAdapter } from "@next-auth/firebase-adapter";
-import { cert, ServiceAccount } from "firebase-admin/app"
-import * as token from '../../../../../nuthazel-firebase-key.json'
-
-export const authOptions = {
-    // Configure one or more authentication providers
-    adapter: FirestoreAdapter({
-        credential: cert(token as ServiceAccount)
-    }),
-	providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID || "", 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
-        }),
-        // ...add more providers here
-    ],
-    secret : process.env.NEXTAUTH_SECRET,
-}
+import { authOptions } from "@/nextAuth/authOptions";
+import NextAuth from "next-auth";
 
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST }
-
+export { handler as GET, handler as POST };
