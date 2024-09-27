@@ -1,4 +1,4 @@
-import { Timestamp } from "firebase/firestore";
+import { Tables } from "./supabase";
 
 export type NutHazel = {
   category: string;
@@ -8,6 +8,7 @@ export type NutHazel = {
   keywords: string[];
   num: number;
   pageurl: string;
-  time: Timestamp;
+  time: string;
   title: string;
 };
+export type Users = Tables<"users">;
