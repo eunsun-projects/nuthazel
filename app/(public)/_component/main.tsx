@@ -4,30 +4,9 @@ import CanvasComp from "@/components/mushroom/canvas";
 import Image from "next/image";
 import Link from "next/link";
 import { createRef, useEffect, useRef, useState } from "react";
-import Loading from "../loading";
+import Loading from "../../loading";
 
-const dandelion = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-];
+const dandelion = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 const assetimg = [
   //오른쪽나무
   ["/assets/main/right_tree1_shadow.webp", "righttree1shadow"],
@@ -95,9 +74,7 @@ export default function Main() {
   const [xy, setXy] = useState<{ x: number; y: number }[]>([]);
   const [smoke, setSmoke] = useState(0);
 
-  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(
-    smokeimg.map(() => createRef())
-  );
+  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(smokeimg.map(() => createRef()));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef2 = useRef<NodeJS.Timeout | null>(null);
   const timerRef3 = useRef<NodeJS.Timeout | null>(null);
@@ -177,20 +154,12 @@ export default function Main() {
 
   return (
     <>
-      {loadTrace <
-        assetimg.length +
-          cloudimg.length +
-          smokeimg.length +
-          dandelion.length && <Loading />}
+      {loadTrace < assetimg.length + cloudimg.length + smokeimg.length + dandelion.length && <Loading />}
       <div
         className={styles.mainpage}
         style={{
           opacity:
-            loadTrace ===
-            assetimg.length +
-              cloudimg.length +
-              smokeimg.length +
-              dandelion.length
+            loadTrace === assetimg.length + cloudimg.length + smokeimg.length + dandelion.length
               ? "1"
               : "0",
         }}
@@ -219,11 +188,7 @@ export default function Main() {
           })}
         {cloudimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               <Image
                 priority
                 src={e[0]}
@@ -239,11 +204,7 @@ export default function Main() {
         <div className={styles.background}></div>
         {assetimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               {e[2] ? (
                 <Link
                   href={e[2]}

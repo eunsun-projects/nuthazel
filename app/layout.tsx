@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import NoMouse from "@/components/nomouse";
 import SetScreenSize from "@/components/setscreensize";
 import { AudioProvider } from "@/contexts/audiocontext";
+import QueryProvider from "@/providers/query.provider";
 import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -23,21 +24,19 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <SetScreenSize />
-      <html lang="kr" className={pretendard.className}>
-        <AudioProvider>
-          <body style={{ backgroundColor: "#eee7d1" }}>
-            <IfLandscape />
-            <NoMouse />
-            <Navbar />
-            {children}
-            <Footer />
-            <GoogleAnalytics />
-            <Analytics />
-          </body>
-        </AudioProvider>
-      </html>
-    </>
+    <html lang="kr" className={pretendard.className}>
+      <body style={{ backgroundColor: "#eee7d1" }}>
+        <QueryProvider>
+          <SetScreenSize />
+          <IfLandscape />
+          <NoMouse />
+          <Navbar />
+          <AudioProvider>{children}</AudioProvider>
+          <Footer />
+        </QueryProvider>
+        <GoogleAnalytics />
+        <Analytics />
+      </body>
+    </html>
   );
 }
