@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    /* src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2'); */
+    src: url('/font/Dovemayo_gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'UhBeeHYUNJUNG';
+    /* src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeHYUNJUNG.woff') format('woff'); */
+    src: url('/font/UhBeeHYUNJUNG.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+:root {
+    --color: #40403d;
+    --dove: 'Dovemayo_gothic';
+    --uhbee: 'UhBeeHYUNJUNG';
+}
+
+html{
+    box-sizing: border-box;
+}
+
+body{
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select: none;
+    width: 100%;
+    /* height: 100%; */
+    height: auto;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    /* touch-action: none; */
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+p{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+/* V1 */
+a {
+    /* text-align: center; */
+    color: var(--color);
+    text-decoration: none;
+}
+
+/* V2 */
+/* a {
+    color: var(--color);
+    text-decoration: none;
+} */

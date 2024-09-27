@@ -1,0 +1,71 @@
+.pagination{
+    font-size: 1.5rem;
+    width: 30%;
+    position: absolute;
+    /* bottom: 3rem; */
+    bottom: 1rem;
+    z-index: 3;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Dovemayo_gothic';
+    color: var(--color);
+}
+.pagination div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination >div:nth-child(1){
+    width: 20%;
+}
+.pagination >div:nth-child(2){
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: center;
+    gap: 0.5rem;
+    width: 60%;
+}
+.pagination >div >span{
+    cursor: pointer;
+}
+.pagination >div >span:hover{
+    color: #eee7d1;
+}
+.pagination >div:nth-child(3){
+    width: 20%;
+}
+.pagination div.nextbefore{
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 710px) {
+    .pagination div.nextbefore{
+        justify-content: space-around;
+    }
+}
+/*아이패드프로, 데스크탑 줄이기*/
+@media screen and (max-width: 1366px) and (min-height: 821px) and (max-height: 1080px) and (orientation: landscape){
+    .pagination{
+        width: 40%;
+    }
+}
+/* 아이패드프로 세로*/
+@media screen and (max-width:1137px) and (orientation: portrait) {
+    .pagination{
+        width: 50%;
+    }
+}
+/* 모바일 */
+@media screen and (max-width:710px) and (orientation: portrait) {
+    .pagination{
+        position: relative;
+        width: 80%;
+        font-size: 1.4rem;
+        top: 12%;
+    }
+}
+@media screen and (max-width:320px) and (orientation: portrait) {
+    .pagination{
+        width: 90%;
+    }
+}

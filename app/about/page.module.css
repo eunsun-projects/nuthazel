@@ -1,0 +1,177 @@
+.page{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding: 9rem 0 0 0; */
+    box-sizing: border-box;
+    touch-action: pan-y;
+}
+.fullbox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ipadbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 56rem;
+    height: 40rem;
+    background-image: url('/assets/about/about_desk.webp');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    /* 1.4:1 */
+}
+.ipadimg{
+    width: 100%;
+    height: 100%;
+}
+.nutimgbox{
+    position: relative;
+    width: 24.6rem;
+    height: 20rem;
+    left: 8%;
+    top: 20%;
+     /* 1.23:1 */
+}
+
+.text{
+    position: absolute;
+    top: 17%;
+    left: 48%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 18rem;
+}
+.text p{
+    text-decoration: underline;
+    white-space: pre-line;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: var(--color);
+    width: fit-content;
+    font-weight: 200;
+    
+}
+/*푸터*/
+.aboutfooter{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 1rem;
+    color: var(--color);
+    box-sizing: border-box;
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cong{
+    width: 1rem;
+    height: 1rem;
+    border: 0.094rem solid var(--color);
+    border-radius: 1rem;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width: 1194px) and (orientation: landscape) {
+    .ipadbox{
+        width: 45rem;
+    }
+    .nutimgbox{
+        width: calc(720px * 0.4);
+        height: calc(587px * 0.4);
+    }
+    .text{
+        top: 25%;
+        left: 46%;
+        height: 15rem;
+    }
+    .text p{
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+}
+@media screen and (max-width: 834px) and (orientation:portrait) {
+    .ipadbox{
+        width: 45rem;
+    }
+    .nutimgbox{
+        width: calc(720px * 0.4);
+        height: calc(587px * 0.4);
+    }
+    .text{
+        top: 25%;
+        left: 46%;
+        height: 15rem;
+    }
+    .text p{
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+}
+@media screen and (max-width: 710px) and (orientation:portrait) {
+    .aboutfooter{
+        position: relative;
+    }
+    .fullbox{
+        padding: 7rem 0 3rem 0;
+        box-sizing: border-box;
+    }
+    .ipadbox{
+        flex-direction: column;
+        background-image: url('/assets/about/about_mobile.webp');
+        /* width: 22rem;
+        height: 37.4rem; */
+        width: 95%;
+        background-size: contain;
+    }
+    .nutimgbox{
+        width: 12.3rem;
+        height: 10rem;
+        left: 0;
+        top: 60%;         
+        /* 1.23:1 */
+    }
+
+    .text{
+        top: 17%;
+        left: 17%;
+        height: 14rem;
+    }
+    .text p{
+        position: relative;
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.5rem;
+    }
+}
+/* @media screen and (max-width: 360px) and (orientation:portrait) {
+    .fullbox{
+        padding: 5rem 0 3rem 0;
+    }
+} */
+@media screen and (max-width: 320px) and (orientation:portrait) {
+    .text{
+        top: 21%;
+        left: 15%;
+        height: 12rem;
+    }
+    .text p{
+        font-size: 0.9rem;
+        line-height: 1.3rem;
+    }
+}
