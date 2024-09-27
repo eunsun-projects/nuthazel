@@ -1,7 +1,7 @@
 "use client";
 import { NutHazelResponse } from "@/app/api/nutget/route";
 import styles from "@/app/page.module.css";
-import { useAudio } from "@/context/audiocontext";
+import { useAudio } from "@/contexts/audiocontext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -38,9 +38,7 @@ export const getNutAll = async (): Promise<NutHazelResponse | null> => {
 
 export default function Navbar() {
   const [innerNav, setInnerNav] = useState(false);
-  const [searchDb, setSearchDb] = useState<
-    NutHazelResponse["nuthazelall"] | null
-  >(null);
+  const [searchDb, setSearchDb] = useState<NutHazelResponse["nuthazelall"] | null>(null);
   const [isOpen, setIsOpen] = useState(0);
   const [mobile, setMobile] = useState<boolean | null>(null);
   const { isPlaying, setIsPlaying } = useAudio();
@@ -88,9 +86,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const isMobile = () => {
-      return /Android|iPhone|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
+      return /Android|iPhone|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }; // =========> mobile device check function
 
     !isMobile() ? setMobile(false) : setMobile(true);
@@ -120,12 +116,7 @@ export default function Navbar() {
         <div className={styles.navheader}>
           <Hamberger isOpen={isOpen} setIsOpen={setIsOpen} />
 
-          <Link
-            href={"/"}
-            style={{ margin: "0 auto" }}
-            prefetch={false}
-            scroll={false}
-          >
+          <Link href={"/"} style={{ margin: "0 auto" }} prefetch={false} scroll={false}>
             <div className={styles.logobox}>
               <div className={styles.logo}>
                 <svg
@@ -152,10 +143,7 @@ export default function Navbar() {
                         className={styles.cls1}
                         d="M33.74,35.64c.43,0,.75-.12.98-.35.43-.45.44-1.22.41-2.11v-.03s-2.21-.87-3.33-.87c-.24,0-.27.01-.52.04-.37.04-.74.06-1.15.06h0c-.91,0-1.83-.1-2.72-.2-.67-.07-1.36-.15-2.04-.18-.13,0-.26-.07-.4-.13-.06-.03-.12-.06-.18-.08.01-1.78-.41-5.58-.38-5.92.11-1.12-.47-1.91-1.13-2.68-.34-.4-.65-.67-1.03-.67-.22,0-.45.08-.77.26-.72.41-1.03,1.16-.79,1.89.08.24.23,3.63.23,3.63,0,0,.37,1.67.36,4.27v.2c.05,1.55.77,2.27,2.43,2.4,2.81.33,5.47.38,8.25.43.52,0,1.22.02,1.77.03Z"
                       />
-                      <path
-                        className={styles.cls1}
-                        d="M33.87,35.64s-.09,0-.13,0c0,0-.01,0-.02,0h.16Z"
-                      />
+                      <path className={styles.cls1} d="M33.87,35.64s-.09,0-.13,0c0,0-.01,0-.02,0h.16Z" />
                       <path
                         className={styles.cls1}
                         d="M87.72,26.32c-.64-.18-1.28-.27-1.91-.27-.85,0-1.65.16-2.37.49-.35.16-.64.45-.92.73-.1.1-.19.19-.29.28-.14.13-.28.28-.41.42-.14.15-.29.31-.45.46-.18.17-.38.33-.58.48-.3.24-.62.49-.89.78-.65.7-.94,1.37-.92,2.18.03,1.77.68,3.33,1.25,4.5.76,1.56,1.88,2.4,3.33,2.5.68.05,1.36.1,2.04.16l.96.08v-.05c.05,0,.1,0,.15-.02.08,0,.17-.02.25-.02.04,0,.08,0,.13,0,.18.03.36.05.54.05,1.91,0,3.24-1.73,3.53-3.35l.06-.33c.09-.52.19-1.06.25-1.6.15-1.33.23-3.05-.54-4.63-.69-1.42-1.86-2.45-3.21-2.84ZM88.68,33.03c-.08.53-.2,1.06-.31,1.58-.04.18-.08.36-.11.54-.11.52-.36.74-.83.74-.05,0-.1,0-.16,0-.73-.07-1.46-.07-2.08-.07-.24,0-.47,0-.71,0h-.07c-.58,0-.96-.26-1.26-.88-.4-.81-.65-1.86-.67-2.76.24-.25.48-.48.7-.71.51-.51.99-.99,1.43-1.51.41-.48.85-.71,1.33-.71.25,0,.52.06.8.19,1.39.63,2.17,2.07,1.93,3.59Z"
@@ -199,9 +187,7 @@ export default function Navbar() {
             className={styles.music}
             style={{
               color: isPlaying ? "transparent" : "var(--color)",
-              WebkitTextStroke: isPlaying
-                ? "2px var(--color)"
-                : "2px transparent",
+              WebkitTextStroke: isPlaying ? "2px var(--color)" : "2px transparent",
             }}
           >
             <p onClick={handleMusicClick}>♪</p>
@@ -233,12 +219,7 @@ export default function Navbar() {
             >
               work
             </Link>
-            <Link
-              onClick={handleclose}
-              href={"/goods"}
-              prefetch={false}
-              scroll={false}
-            >
+            <Link onClick={handleclose} href={"/goods"} prefetch={false} scroll={false}>
               <p>goods</p>
             </Link>
             <Link
