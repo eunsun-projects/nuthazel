@@ -53,7 +53,7 @@ export type Database = {
           created_at: string
           desc: string
           id: string
-          imgurl: string[] | null
+          imgurl: string[]
           isPublic: boolean
           keywords: string[]
           link: string | null
@@ -65,7 +65,7 @@ export type Database = {
           created_at?: string
           desc: string
           id?: string
-          imgurl?: string[] | null
+          imgurl: string[]
           isPublic?: boolean
           keywords: string[]
           link?: string | null
@@ -77,7 +77,7 @@ export type Database = {
           created_at?: string
           desc?: string
           id?: string
-          imgurl?: string[] | null
+          imgurl?: string[]
           isPublic?: boolean
           keywords?: string[]
           link?: string | null

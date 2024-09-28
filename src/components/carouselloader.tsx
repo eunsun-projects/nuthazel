@@ -1,4 +1,4 @@
-import styles from "@/app/page.module.css";
+import styles from "@/styles/home.module.css";
 
 export default function CarouselLoader() {
   return (

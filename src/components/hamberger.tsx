@@ -1,5 +1,6 @@
 "use client";
-import styles from "@/app/page.module.css";
+
+import styles from "@/styles/home.module.css";
 
 interface HambergerProps {
   isOpen: number;

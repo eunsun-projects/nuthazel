@@ -1,5 +1,6 @@
 "use client";
-import styles from "@/app/page.module.css";
+
+import styles from "@/styles/home.module.css";
 import isMobile from "@/utils/isMobile";
 import { useEffect, useState } from "react";
 
