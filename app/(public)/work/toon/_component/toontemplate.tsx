@@ -1,8 +1,9 @@
 "use client";
 import Loading from "@/app/loading";
-import styles from "@/app/work/toon/page.module.css";
 import ToonGridLoading from "@/components/toongridloading";
 import ToonLoading from "@/components/toonloading";
+import { useToonQuery } from "@/hooks/queries/toon.query";
+import styles from "@/styles/toon.module.css";
 import findParentArrayIndex from "@/utils/findParentArrayIndex";
 import isMobile from "@/utils/isMobile";
 import Image from "next/image";
@@ -47,16 +48,15 @@ const assetimg = [
   ["/assets/toon/background/train.webp", "train"],
 ];
 
-interface ToonPageProps {
-  toon: FirebaseFirestore.DocumentData[];
-}
-
-export default function ToonTemplate({ toon }: ToonPageProps) {
+export default function ToonTemplate() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const { data: toon } = useToonQuery();
+
   const totalContents = useMemo(() => {
+    if (!toon) return [];
     const copy = [...toon];
     return Array(Math.ceil(toon.length / 6))
       .fill(null)
@@ -71,12 +71,7 @@ export default function ToonTemplate({ toon }: ToonPageProps) {
   const [toonLoad, setToonLoad] = useState(0);
   const [curr, setCurr] = useState(0);
   const [indexing, setIndexing] = useState(0);
-  const [queryNum, setQueryNum] = useState<number | null>(null);
 
-  // const textRef = useRef(null);
-
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -105,8 +100,6 @@ export default function ToonTemplate({ toon }: ToonPageProps) {
     const num = searchParams.get("num");
 
     if (num) {
-      setQueryNum(Number(num));
-
       // index 는 totalContents 에서 최종 아이템을 포함하는 배열의 인덱스임
       const index = findParentArrayIndex(totalContents, Number(num));
       setIndexing(index);
@@ -118,19 +111,26 @@ export default function ToonTemplate({ toon }: ToonPageProps) {
         (e) => e.num === Number(num)
       );
       setSelectedNum(innerIndex);
-
-      //toonCategory[selectedNum]
       setShowModal(true);
     }
-  }, [searchParams]);
+  }, [
+    searchParams,
+    createQueryString,
+    pathname,
+    router,
+    setIndexing,
+    setSelectedNum,
+    setShowModal,
+    setToonCategory,
+    totalContents,
+  ]);
 
   useEffect(() => {
     // 쿼리스트링으로 직접 들어오지 않았을때만 수행
     if (searchParams.size === 0) {
       setToonCategory(totalContents[indexing]);
-      // router.replace( pathname );
     }
-  }, [indexing, searchParams]);
+  }, [indexing, searchParams, setToonCategory, totalContents]);
 
   useEffect(() => {
     // 모바일이면 toon 백그라운드 div 에 overflowX hidden, 아니면 overflow hidden
@@ -221,15 +221,17 @@ export default function ToonTemplate({ toon }: ToonPageProps) {
                 );
               })}
             </div>
-            <Pagination
-              totalPage={toon}
-              limit={6}
-              curr={curr}
-              setCurr={setCurr}
-              setLoad={setToonLoad}
-              indexing={indexing}
-              setIndexing={setIndexing}
-            />
+            {toon && (
+              <Pagination
+                totalPage={toon}
+                limit={6}
+                curr={curr}
+                setCurr={setCurr}
+                setLoad={setToonLoad}
+                indexing={indexing}
+                setIndexing={setIndexing}
+              />
+            )}
           </>
         )}
       </div>
