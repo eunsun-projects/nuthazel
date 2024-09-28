@@ -1,10 +1,11 @@
 "use client";
-import EmailForm from "@/app/contact/_component/email";
-import styles from "@/app/contact/page.module.css";
+
 import Loading from "@/app/loading";
+import styles from "@/styles/contact.module.css";
 import isMobile from "@/utils/isMobile";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import EmailForm from "./email";
 
 const assetstar = [
   {},
@@ -79,7 +80,7 @@ const cloudimg = [
   ["/assets/main/mid_cloud_copy.webp", "midcloudcopy"],
 ];
 
-export default function ContactPage() {
+export default function ContactTemplate() {
   const [loadTrace, setLoadTrace] = useState(0);
   const [gif, setGif] = useState(false);
   const [mobile, setMobile] = useState(false);

@@ -1,5 +1,6 @@
 "use client";
-import styles from "@/app/contact/page.module.css";
+
+import styles from "@/styles/contact.module.css";
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
 
@@ -146,6 +147,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
                 <img
                   className={styles.starimg}
                   src="/assets/contact/mailstar.webp"
+                  alt="star"
                 ></img>
               </span>
             </label>
@@ -165,6 +167,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
                     <img
                       className={styles.starimg}
                       src="/assets/contact/mailstar.webp"
+                      alt="star"
                     ></img>
                   </span>
                 </label>
@@ -180,6 +183,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ gif, setGif, mobile }) => {
                     <img
                       className={styles.starimg}
                       src="/assets/contact/mailstar.webp"
+                      alt="star"
                     ></img>
                   </span>
                 </label>

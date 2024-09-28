@@ -1,5 +1,5 @@
 "use client";
-// import useSpline from '@splinetool/r3f-spline'
+
 import { OrthographicCamera, PerspectiveCamera } from "@react-three/drei";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";

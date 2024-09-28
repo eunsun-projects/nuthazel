@@ -1,5 +1,4 @@
 import SetScreenSize from "@/components/setscreensize";
-import "../globals.css";
 
 export default function ContactLayout({
   children,
