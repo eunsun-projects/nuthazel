@@ -1,5 +1,6 @@
 "use client";
-import MushroomModal from "@/app/work/collaboration/_component/mushroommodal";
+
+import MushroomModal from "@/app/(public)/work/collaboration/_component/mushroommodal";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber"; //대문자 Canvas를 불러와라.
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -41,12 +42,11 @@ export default function CanvasComp({ classification }: CanvasCompProps) {
 
   useEffect(() => {
     const num = searchParams.get("num");
-
     if (num === "screenxyz") {
       setModal(true);
       router.push(pathname + "?" + createQueryString("num", "screenxyz"));
     }
-  }, [searchParams]);
+  }, [searchParams, router, pathname, createQueryString]);
 
   return (
     <>
@@ -56,15 +56,12 @@ export default function CanvasComp({ classification }: CanvasCompProps) {
           <Scene classification={classification} handleClick={handleClick} />
 
           <OrbitControls
-            // makeDefault
             enableZoom={false}
             enableRotate={classification === "main" ? true : false}
             enablePan={false}
             target={[0, 0, 0]}
             maxDistance={0}
             minDistance={7}
-            // maxAzimuthAngle={0}
-            // minAzimuthAngle={0}
             minPolarAngle={1.4}
             maxPolarAngle={0}
           />
