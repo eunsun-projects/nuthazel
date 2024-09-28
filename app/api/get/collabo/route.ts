@@ -1,4 +1,4 @@
-import { collabo } from "@/types/NutHazel.type";
+import { Collabo } from "@/types/NutHazel.type";
 import { createClient } from "@/utils/supabase/server";
 import { PostgrestError } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
@@ -9,7 +9,7 @@ export async function GET() {
   const {
     data: collabo,
     error,
-  }: { data: collabo[] | null; error: PostgrestError | null } = await supabase
+  }: { data: Collabo[] | null; error: PostgrestError | null } = await supabase
     .from("collabo")
     .select("*")
     .order("num", { ascending: false });
