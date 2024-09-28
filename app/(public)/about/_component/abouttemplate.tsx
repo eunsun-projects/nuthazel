@@ -1,6 +1,7 @@
 "use client";
-import styles from "@/app/about/page.module.css";
+
 import Loading from "@/app/loading";
+import styles from "@/styles/about.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ const fullText = `새로운  무언가를 시작하기 전에,
     다시 나의 일을 할 수 있을까 고민했었던 
     일러스트레이터 헤이즐씨처럼!`;
 
-export default function AboutPage() {
+export default function AboutTemplate() {
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [contactLoad, setContactLoad] = useState(0);
