@@ -1,5 +1,5 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
+
 import styles from "@/app/nutadmin/page.module.css";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -8,11 +8,7 @@ import AdminIllust from "./admin-illust";
 import AdminToon from "./admin-toon";
 import SideMenu from "./sidemenu";
 
-interface AdminMainProps {
-  data: NutHazelResponse["nuthazelall"] | null;
-}
-
-export default function AdminMain({ data }: AdminMainProps) {
+export default function AdminTemplate() {
   const router = useRouter();
   const pathname = usePathname();
   const searchparams = useSearchParams(); // next기능
