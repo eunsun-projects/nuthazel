@@ -1,9 +1,9 @@
 "use client";
 import Loading from "@/app/loading";
-import styles from "@/app/work/page.module.css";
+import styles from "@/styles/work.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef, useCallback, useEffect, useRef, useState } from "react";
 
 const assetimg = [
   //창문
@@ -93,7 +93,7 @@ const menu = [
   },
 ];
 
-export default function Work() {
+export default function WorkTemplate() {
   const [bubble, setBubble] = useState(false);
   const [loadTrace, setLoadTrace] = useState(0);
   const [smoke, setSmoke] = useState(0);
@@ -110,7 +110,7 @@ export default function Work() {
     setLoadTrace((prev) => prev + 1);
   };
 
-  const runAnimation = () => {
+  const runAnimation = useCallback(() => {
     smokeRefs.current.forEach((ref, index) => {
       timerRef.current = setTimeout(() => {
         // 이미지 페이드인
@@ -132,12 +132,12 @@ export default function Work() {
         }
       }, fadeInDelay * index); // 각 이미지가 나타나는 시간을 순차적으로 지연
     });
-  };
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       setBubble(true);
-    }, 1200);
+    }, 400); // 400으로 변경
 
     runAnimation(); // 첫 로드 시 애니메이션 시작
 
@@ -146,14 +146,14 @@ export default function Work() {
       if (timerRef2.current) clearTimeout(timerRef2.current);
       if (timerRef3.current) clearTimeout(timerRef3.current);
     };
-  }, []);
+  }, [runAnimation]);
 
   useEffect(() => {
     if (smoke === 1) {
       setSmoke(0);
       runAnimation();
     }
-  }, [smoke]);
+  }, [smoke, runAnimation]);
 
   return (
     <>
