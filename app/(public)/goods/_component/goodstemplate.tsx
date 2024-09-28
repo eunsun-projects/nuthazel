@@ -1,6 +1,7 @@
 "use client";
-import styles from "@/app/goods/page.module.css";
+
 import Loading from "@/app/loading";
+import styles from "@/styles/goods.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -20,11 +21,8 @@ const albam = [
   ["/assets/goods/albam3.webp", "albam3"],
 ];
 
-export default function Goods() {
+export default function GoodsTemplate() {
   const [loadTrace, setLoadTrace] = useState(0);
-  // const [animate, setAnimate] = useState(true);
-  // const onStop = () => setAnimate(false);
-  // const onRun = () => setAnimate(true);
 
   const handleImgLoaded = () => {
     setLoadTrace((prev) => prev + 1);
@@ -113,10 +111,10 @@ export default function Goods() {
           // onMouseLeave={onRun}
         >
           <div className={styles.flowmasking}>
-            <img src="/assets/goods/masking.webp"></img>
+            <img src="/assets/goods/masking.webp" alt="masking" />
           </div>
           <div className={styles.cloneflowmasking}>
-            <img src="/assets/goods/masking.webp"></img>
+            <img src="/assets/goods/masking.webp" alt="masking" />
           </div>
         </div>
 

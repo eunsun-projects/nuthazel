@@ -1,6 +1,4 @@
 import SetScreenSize from "@/components/setscreensize";
-import "../globals.css";
-// import Footer from '@/components/footer'
 
 export default function GoodsLayout({
   children,
@@ -23,7 +21,6 @@ export default function GoodsLayout({
         }}
       >
         {children}
-        {/* <Footer/> */}
       </div>
     </>
   );
