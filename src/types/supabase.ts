@@ -9,6 +9,123 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      collabo: {
+        Row: {
+          created_at: string
+          desc: string
+          id: string
+          imgurl: string[]
+          isPublic: boolean
+          keywords: string[]
+          link: Json | null
+          num: number | null
+          pageurl: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          desc: string
+          id?: string
+          imgurl: string[]
+          isPublic?: boolean
+          keywords: string[]
+          link?: Json | null
+          num?: number | null
+          pageurl: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          desc?: string
+          id?: string
+          imgurl?: string[]
+          isPublic?: boolean
+          keywords?: string[]
+          link?: Json | null
+          num?: number | null
+          pageurl?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      illust: {
+        Row: {
+          created_at: string
+          desc: string
+          id: string
+          imgurl: string[] | null
+          isPublic: boolean
+          keywords: string[]
+          link: string | null
+          num: number | null
+          pageurl: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          desc: string
+          id?: string
+          imgurl?: string[] | null
+          isPublic?: boolean
+          keywords: string[]
+          link?: string | null
+          num?: number | null
+          pageurl: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          desc?: string
+          id?: string
+          imgurl?: string[] | null
+          isPublic?: boolean
+          keywords?: string[]
+          link?: string | null
+          num?: number | null
+          pageurl?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      toon: {
+        Row: {
+          created_at: string
+          desc: string
+          id: string
+          imgurl: string[]
+          isPublic: boolean
+          keywords: string[]
+          link: string | null
+          num: number | null
+          pageurl: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          desc: string
+          id?: string
+          imgurl: string[]
+          isPublic?: boolean
+          keywords: string[]
+          link?: string | null
+          num?: number | null
+          pageurl: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          desc?: string
+          id?: string
+          imgurl?: string[]
+          isPublic?: boolean
+          keywords?: string[]
+          link?: string | null
+          num?: number | null
+          pageurl?: string
+          title?: string
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           avatar: string | null

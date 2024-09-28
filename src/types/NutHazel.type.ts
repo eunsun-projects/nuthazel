@@ -11,4 +11,6 @@ export type NutHazel = {
   time: string;
   title: string;
 };
+
+export type Toon = Tables<"toon">;
 export type Users = Tables<"users">;

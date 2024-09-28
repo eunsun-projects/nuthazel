@@ -1,6 +1,5 @@
 "use client";
 import Loading from "@/app/loading";
-import Modal from "@/app/work/toon/_component/modal";
 import styles from "@/app/work/toon/page.module.css";
 import ToonGridLoading from "@/components/toongridloading";
 import ToonLoading from "@/components/toonloading";
@@ -10,6 +9,7 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Pagination from "../../_component/pagination";
+import Modal from "./modal";
 
 const assetimg = [
   /*모빌*/
@@ -51,7 +51,7 @@ interface ToonPageProps {
   toon: FirebaseFirestore.DocumentData[];
 }
 
-export default function ToonPage({ toon }: ToonPageProps) {
+export default function ToonTemplate({ toon }: ToonPageProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

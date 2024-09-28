@@ -1,9 +1,8 @@
 import { NutHazelResponse } from "@/app/api/nutget/route";
 import { basicMeta, basicViewport } from "@/app/basicmeta";
 import Loading from "@/app/loading";
-import ToonPage from "@/app/work/toon/_component/toon";
-import Config from "@/config/config.export";
 import { Suspense } from "react";
+import ToonTemplate from "./_component/toontemplate";
 
 export const metadata = basicMeta;
 export const viewport = basicViewport;
@@ -49,7 +48,7 @@ export default async function Toon() {
 
   return (
     <Suspense fallback={<Loading />}>
-      {result && <ToonPage toon={result} />}
+      {result && <ToonTemplate toon={result} />}
     </Suspense>
   );
 }
