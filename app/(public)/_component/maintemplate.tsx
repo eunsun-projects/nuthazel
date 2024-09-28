@@ -1,8 +1,8 @@
 "use client";
 
 import Loading from "@/app/loading";
-import styles from "@/app/main.module.css";
 import CanvasComp from "@/components/mushroom/canvas";
+import styles from "@/styles/main.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { createRef, useEffect, useRef, useState } from "react";
