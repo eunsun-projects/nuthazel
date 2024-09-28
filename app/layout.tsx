@@ -12,7 +12,7 @@ import { basicMeta } from "./basicmeta";
 import "./globals.css";
 
 const pretendard = localFont({
-  src: "./PretendardVariable.woff2",
+  src: "/font/PretendardVariable.woff2",
   weight: "45 920",
   style: "normal",
   display: "swap",
