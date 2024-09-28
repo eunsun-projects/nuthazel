@@ -1,6 +1,7 @@
 "use client";
-import styles from "@/app/work/toon/page.module.css";
+
 import CarouselLoader from "@/components/carouselloader";
+import styles from "@/styles/toon.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import {
   CarouselProvider,
@@ -65,7 +66,7 @@ export default function Modal({ setShowModal, toonCon }: ModalProps) {
                         hasMasterSpinner
                         src={e}
                         alt="toon"
-                      ></Image>
+                      />
                     </Slide>
                   );
                 })}
