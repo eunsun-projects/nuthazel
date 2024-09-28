@@ -19,7 +19,7 @@ interface ModalProps {
 }
 
 //selectedNum, toon
-export default function Modal({ setShowModal, toonCon }: ModalProps) {
+export default function ToonModal({ setShowModal, toonCon }: ModalProps) {
   const router = useRouter();
   const pathname = usePathname();
 

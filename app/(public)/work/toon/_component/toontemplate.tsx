@@ -10,7 +10,7 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Pagination from "../../_component/pagination";
-import Modal from "./modal";
+import ToonModal from "./toonmodal";
 
 const assetimg = [
   /*모빌*/
@@ -184,7 +184,7 @@ export default function ToonTemplate() {
           })}
         {gridPage && toonLoad < toonCategory.length && <ToonGridLoading />}
         {showModal && (
-          <Modal
+          <ToonModal
             setShowModal={setShowModal}
             toonCon={toonCategory[selectedNum ?? 0]}
           />
