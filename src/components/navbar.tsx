@@ -11,9 +11,21 @@ import Hamberger from "./hamberger";
 import Search from "./search";
 
 export default function Navbar() {
-  const { data: illust } = useIllustQuery();
-  const { data: collabo } = useCollaboQuery();
-  const { data: toon } = useToonQuery();
+  const {
+    data: illust,
+    isLoading: illustLoading,
+    error: illustError,
+  } = useIllustQuery();
+  const {
+    data: collabo,
+    isLoading: collaboLoading,
+    error: collaboError,
+  } = useCollaboQuery();
+  const {
+    data: toon,
+    isLoading: toonLoading,
+    error: toonError,
+  } = useToonQuery();
 
   const [isOpen, setIsOpen] = useState(0);
   const { isPlaying, setIsPlaying } = useAudio();
@@ -26,6 +38,8 @@ export default function Navbar() {
     }
     return null;
   }, [illust, collabo, toon]);
+
+  // console.log("searchDb ====>", searchDb);
 
   const handleMusicClick = () => {
     if (!isPlaying) {
