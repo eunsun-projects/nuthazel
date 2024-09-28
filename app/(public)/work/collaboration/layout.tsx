@@ -1,6 +1,5 @@
 import SetScreenSize from "@/components/setscreensize";
 import "../../globals.css";
-// import Footer from '@/components/footer'
 
 export default function CollaborationLayout({
   children,
@@ -17,7 +16,6 @@ export default function CollaborationLayout({
         }}
       >
         {children}
-        {/* <Footer/> */}
       </div>
     </>
   );

@@ -1,4 +1,3 @@
-import "../../globals.css";
 import "../../react-carousel.es.css";
 
 export default function IllustLayout({

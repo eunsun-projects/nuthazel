@@ -1,13 +1,10 @@
-import "../../globals.css";
 import "../../react-carousel.es.css";
-// import Footer from '@/components/footer'
 
 export default function ToonLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  //overflowX:'hidden',
   return (
     <div
       id="toonbackground"
@@ -20,7 +17,6 @@ export default function ToonLayout({
       }}
     >
       {children}
-      {/* <Footer/> */}
     </div>
   );
 }
