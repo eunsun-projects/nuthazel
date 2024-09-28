@@ -1,5 +1,7 @@
 "use client";
-import styles from "@/app/work/collaboration/page.module.css";
+
+import styles from "@/styles/collabo.module.css";
+import { Collabo } from "@/types/NutHazel.type";
 import NImage from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -7,11 +9,20 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface ModalProps {
   setModalOpen: (open: boolean) => void;
-  collabocontents: FirebaseFirestore.DocumentData;
+  collabocontents: Collabo;
   setQueryNum: (num: number | null) => void;
 }
 
-export default function Modal({
+type CollaboWithSizes = Collabo & {
+  sizes: ("wide" | "square" | "narrow")[];
+};
+
+type Link = {
+  title: string;
+  href: string;
+};
+
+export default function CollaboModal({
   setModalOpen,
   collabocontents,
   setQueryNum,
@@ -20,9 +31,7 @@ export default function Modal({
   const pathname = usePathname();
 
   // collabo 스테이트는 이미지 정방인지 뭔지 판단하는 것임
-  const [collabo, setCollabo] = useState<FirebaseFirestore.DocumentData | null>(
-    null
-  );
+  const [collabo, setCollabo] = useState<CollaboWithSizes | null>(null);
 
   const contentsRef = useRef<HTMLDivElement>(null);
   const xRef = useRef<HTMLDivElement>(null);
@@ -42,7 +51,7 @@ export default function Modal({
   };
 
   useLayoutEffect(() => {
-    function sizePromises(src: string) {
+    function sizePromises(src: string): Promise<"wide" | "square" | "narrow"> {
       return new Promise((resolve, reject) => {
         const image = new Image();
         image.src = src;
@@ -65,7 +74,10 @@ export default function Modal({
     // 콜라보 요소를 클릭했을 때 === selectedIndex 가 null 이 아닐 때
     if (collabocontents !== null) {
       // 선택된 아이템 객체 복사
-      const copy = { ...collabocontents };
+      const copy: CollaboWithSizes = {
+        ...collabocontents,
+        sizes: [],
+      };
 
       Promise.all(copy.imgurl.map((e: string) => sizePromises(e)))
         .then((result) => {
@@ -78,8 +90,6 @@ export default function Modal({
   }, [collabocontents]);
 
   useEffect(() => {
-    // document.body.style.overflow = "hidden";
-
     return () => {
       setCollabo(null);
     };
@@ -111,19 +121,21 @@ export default function Modal({
               <p
                 style={{
                   paddingBottom:
-                    collabocontents.link.title.length > 0 ? "1rem" : "0px",
+                    (collabocontents.link as Link).title.length > 0
+                      ? "1rem"
+                      : "0px",
                 }}
               >
                 {collabocontents.desc}
               </p>
               {/** length 로 판단하는 이유는, collabo 면 nutadmin에서 link 객체가 무조건 있기 때문에*/}
-              {collabocontents.link.title.length > 0 && (
+              {(collabocontents.link as Link).title.length > 0 && (
                 <Link
-                  href={collabocontents.link.href}
+                  href={(collabocontents.link as Link).href}
                   target="_blank"
                   style={{ color: "#916b4d" }}
                 >
-                  <p>{collabocontents.link.title}</p>
+                  <p>{(collabocontents.link as Link).title}</p>
                 </Link>
               )}
             </div>
@@ -147,6 +159,7 @@ export default function Modal({
                         height: "100%",
                         objectFit: "contain",
                       }}
+                      alt="loading"
                       src="/assets/loading.gif"
                     ></img>
                   </div>

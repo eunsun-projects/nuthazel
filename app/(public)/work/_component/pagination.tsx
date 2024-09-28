@@ -1,11 +1,11 @@
 "use client";
 import styles from "@/styles/pagination.module.css";
-import { Toon } from "@/types/NutHazel.type";
+import { Collabo, Toon } from "@/types/NutHazel.type";
 import { sliceArrayByLimit } from "@/utils/sliceArrayByLimits";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 
 interface PaginationProps {
-  totalPage: Toon[];
+  totalPage: Toon[] | Collabo[];
   limit: number;
   curr: number;
   setCurr: Dispatch<SetStateAction<number>>;

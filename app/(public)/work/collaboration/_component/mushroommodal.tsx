@@ -1,5 +1,6 @@
 "use client";
-import styles from "@/app/work/collaboration/page.module.css";
+
+import styles from "@/styles/collabo.module.css";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Script from "next/script";
