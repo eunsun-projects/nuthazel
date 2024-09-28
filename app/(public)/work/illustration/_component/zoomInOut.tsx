@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/app/work/illustration/page.module.css";
+import styles from "@/styles/illust.module.css";
 import {
   TransformComponent,
   TransformWrapper,

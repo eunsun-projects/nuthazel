@@ -1,6 +1,6 @@
 "use client";
-import styles from "@/app/work/illustration/page.module.css";
-// import Image from 'next/image';
+
+import styles from "@/styles/illust.module.css";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ZoomInOut from "./zoomInOut";
@@ -12,7 +12,7 @@ interface IlluModalProps {
   mobile: boolean;
 }
 
-export default function IlluModal({
+export default function CloseUpModal({
   setIlluModal,
   selectedItem,
   setCurrIndex,
@@ -26,18 +26,20 @@ export default function IlluModal({
     setIlluModal(false);
   };
 
-  const handlePop = () => {
-    const num = searchParams.get("num");
-    setCurrIndex(Number(num));
-    setIlluModal(false);
-  };
-
   useEffect(() => {
+    const handlePop = () => {
+      const num = searchParams.get("num");
+      setCurrIndex(Number(num));
+      setIlluModal(false);
+    };
+
     window.addEventListener("popstate", handlePop);
+
     return () => {
       window.removeEventListener("popstate", handlePop);
     };
-  }, []);
+  }, [searchParams, setCurrIndex, setIlluModal]);
+
   useEffect(() => {
     const image = new Image();
     image.src = selectedItem;
@@ -58,8 +60,6 @@ export default function IlluModal({
       }
     };
   }, [selectedItem]);
-
-  // console.log(size)
 
   return (
     <>

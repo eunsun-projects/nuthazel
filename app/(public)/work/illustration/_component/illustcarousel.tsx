@@ -1,6 +1,8 @@
 "use client";
-import styles from "@/app/work/illustration/page.module.css";
+
 import CarouselLoader from "@/components/carouselloader";
+import styles from "@/styles/illust.module.css";
+import { Illust } from "@/types/NutHazel.type";
 import {
   ButtonBack,
   ButtonFirst,
@@ -12,12 +14,12 @@ import {
   Slider,
 } from "pure-react-carousel";
 import { useContext, useEffect, useState } from "react";
-import IlluModal from "./illumodal";
+import CloseUpModal from "./closeupmodal";
 
 interface IllustCarouselProps {
   currIndex: number;
   setCurrIndex: (index: number) => void;
-  illust: FirebaseFirestore.DocumentData[];
+  illust: Illust[];
   mobile: boolean;
 }
 
@@ -35,26 +37,21 @@ export default function IllustCarousel({
   const carouselContext = useContext(CarouselContext);
   // console.log(selectedItem)
 
-  const handleIlluClick = (item: FirebaseFirestore.DocumentData) => () => {
+  const handleIlluClick = (item: Illust) => () => {
+    if (!item.imgurl) return;
     setIlluModal(true);
     setSelectedItem(item.imgurl[1]);
-    // if(mobile === false){
-    //     setIlluModal(true)
-    //     setSelectedItem(item.imgurl[1])
-    // }
   };
 
   useEffect(() => {
     function onChange() {
       setCurrIndex(carouselContext.state.currentSlide);
-      // setChangedIndex(carouselContext.state.currentSlide);
-      // console.log(carouselContext.state.currentSlide)
     }
     carouselContext.subscribe(onChange);
     return () => {
       carouselContext.unsubscribe(onChange);
     };
-  }, [carouselContext]);
+  }, [carouselContext, setCurrIndex]);
 
   useEffect(() => {
     if (currIndex !== null) {
@@ -62,11 +59,10 @@ export default function IllustCarousel({
     }
   }, [currIndex]);
 
-  // 4.7 아래에서 styles.modalimg 여기를 수정해서 썸네일처럼 1:1 비율 만들것
   return (
     <>
       {illuModal && selectedItem && (
-        <IlluModal
+        <CloseUpModal
           setIlluModal={setIlluModal}
           selectedItem={selectedItem}
           setCurrIndex={setCurrIndex}
@@ -85,7 +81,7 @@ export default function IllustCarousel({
                 <Image
                   className={styles.modalimg}
                   hasMasterSpinner
-                  src={e.imgurl[0]}
+                  src={e?.imgurl?.[0] ?? "/assets/loading.gif"}
                   onClick={handleIlluClick(e)}
                   alt="illust"
                 ></Image>
