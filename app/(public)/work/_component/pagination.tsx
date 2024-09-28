@@ -1,10 +1,11 @@
 "use client";
-import styles from "@/app/work/_component/page.module.css";
+import styles from "@/styles/pagination.module.css";
+import { Toon } from "@/types/NutHazel.type";
 import { sliceArrayByLimit } from "@/utils/sliceArrayByLimits";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 
 interface PaginationProps {
-  totalPage: FirebaseFirestore.DocumentData[];
+  totalPage: Toon[];
   limit: number;
   curr: number;
   setCurr: Dispatch<SetStateAction<number>>;
@@ -31,7 +32,7 @@ const Pagination = ({
     //totalPage.length 자리에 테스트할 배열의 길이(숫자) 넣어보면 됨
     const slicedPageArray = sliceArrayByLimit(totalPage.length, limit);
     return slicedPageArray;
-  }, [totalPage]);
+  }, [totalPage, limit]);
 
   // curr 는 페이지네이션 넘기기 버튼 << < > >> 으로만 조정하므로
   // 페이지직접 클릭에서는 setCurr 을 하지 않는다.
@@ -110,14 +111,12 @@ const Pagination = ({
 
   useEffect(() => {
     setCurrentPageArray(totalPageArray.final[curr]);
-  }, [curr]);
+  }, [curr, totalPageArray]);
 
   useEffect(() => {
     // 여기 위험 나중에 게시물 많아지면 꼭 체크해볼 것
     setCurrentPageArray(totalPageArray.final[0]);
-
-    // console.log(totalPageArray)
-  }, []);
+  }, [totalPageArray]);
 
   return (
     <div
