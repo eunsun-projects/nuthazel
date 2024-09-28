@@ -1,5 +1,5 @@
 import { basicMeta, basicViewport } from "@/app/basicmeta";
-import styles from "@/app/work/page.module.css";
+import styles from "@/styles/work.module.css";
 import Work from "./_component/work";
 
 export const metadata = basicMeta;
