@@ -1,4 +1,5 @@
 "use client";
+
 import styles from "@/styles/pagination.module.css";
 import { Collabo, Toon } from "@/types/NutHazel.type";
 import { sliceArrayByLimit } from "@/utils/sliceArrayByLimits";

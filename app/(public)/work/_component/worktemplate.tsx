@@ -1,4 +1,5 @@
 "use client";
+
 import Loading from "@/app/loading";
 import styles from "@/styles/work.module.css";
 import Image from "next/image";
