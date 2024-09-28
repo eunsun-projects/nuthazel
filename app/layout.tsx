@@ -21,6 +21,8 @@ const pretendard = localFont({
 
 export const metadata = basicMeta;
 
+// test
+
 export default function RootLayout({
   children,
 }: {
