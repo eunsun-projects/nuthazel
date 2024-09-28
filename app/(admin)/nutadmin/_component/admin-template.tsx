@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/app/nutadmin/page.module.css";
+import styles from "@/styles/admin.module.css";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import AdminCollab from "./admin-collab";

@@ -1,15 +1,11 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
-import styles from "@/app/nutadmin/page.module.css";
+
+import styles from "@/styles/admin.module.css";
 import { useState } from "react";
 import IllustCollabModal from "./illustcollabmodal";
 import List from "./list";
 
-interface AdminCollabProps {
-  data: NutHazelResponse["nuthazelall"] | null;
-}
-
-export default function AdminCollab({ data }: AdminCollabProps) {
+export default function AdminCollab() {
   // console.log(data)
   const [modal, setModal] = useState(false);
   const [currNum, setCurrNum] = useState<number | null>(null);

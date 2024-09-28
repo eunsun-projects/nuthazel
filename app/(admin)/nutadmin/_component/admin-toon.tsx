@@ -1,6 +1,6 @@
 "use client";
 import { NutHazelResponse } from "@/app/api/nutget/route";
-import styles from "@/app/nutadmin/page.module.css";
+import styles from "@/styles/admin.module.css";
 import { useState } from "react";
 import List from "./list";
 import ToonModal from "./toonmodal";
