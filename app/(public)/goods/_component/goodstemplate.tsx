@@ -38,10 +38,7 @@ export default function GoodsTemplate() {
         }}
       >
         <Link href={"https://smartstore.naver.com/nuthazel"} target="blank">
-          <div
-            className={styles.shopdiv}
-            style={{ zIndex: "1", cursor: "pointer" }}
-          >
+          <div className={styles.shopdiv} style={{ zIndex: "1", cursor: "pointer" }}>
             <p>ᨎᨎᨎᨎᨎᨎ</p>
             <div className={styles.door} style={{ position: "relative" }}>
               <Image
@@ -49,6 +46,7 @@ export default function GoodsTemplate() {
                 src={"/assets/goods/storedoor.webp"}
                 alt="elements"
                 fill
+                unoptimized
                 sizes="(max-width: 1920px) 100%, 100%"
               />
             </div>
@@ -58,6 +56,7 @@ export default function GoodsTemplate() {
                 src={"/assets/goods/ladybug_.webp"}
                 alt="elements"
                 fill
+                unoptimized
                 sizes="(max-width: 1920px) 100%, 100%"
               />
             </div>
@@ -69,16 +68,13 @@ export default function GoodsTemplate() {
 
         {albam.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               <Image
                 priority
                 src={e[0]}
                 alt="elements"
                 fill
+                unoptimized
                 onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
               />
@@ -88,16 +84,13 @@ export default function GoodsTemplate() {
         <div className={styles.stickerdiv}>
           {sticker.map((e, i) => {
             return (
-              <div
-                key={i}
-                className={styles[e[1]]}
-                style={{ position: "relative" }}
-              >
+              <div key={i} className={styles[e[1]]} style={{ position: "relative" }}>
                 <Image
                   priority
                   src={e[0]}
                   alt="elements"
                   fill
+                  unoptimized
                   onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />

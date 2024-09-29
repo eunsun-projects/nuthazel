@@ -126,20 +126,12 @@ export default function ContactTemplate() {
 
   return (
     <>
-      {loadTrace <
-        assetimg.length +
-          assetstar.length +
-          postbox.length +
-          cloudimg.length && <Loading />}
+      {loadTrace < assetimg.length + assetstar.length + postbox.length + cloudimg.length && <Loading />}
       <div
         className={styles.page}
         style={{
           opacity:
-            loadTrace ===
-            assetimg.length +
-              assetstar.length +
-              postbox.length +
-              +cloudimg.length
+            loadTrace === assetimg.length + assetstar.length + postbox.length + +cloudimg.length
               ? "1"
               : "0",
         }}
@@ -161,6 +153,7 @@ export default function ContactTemplate() {
                   src={"/assets/contact/star.webp"}
                   alt="elements"
                   fill
+                  unoptimized
                   onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
@@ -169,11 +162,7 @@ export default function ContactTemplate() {
           })}
         {cloudimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               <Image
                 priority
                 src={e[0]}
@@ -181,6 +170,7 @@ export default function ContactTemplate() {
                 fill
                 onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
+                unoptimized
               />
             </div>
           );
@@ -195,17 +185,14 @@ export default function ContactTemplate() {
                 fill
                 onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
+                unoptimized
               />
             </div>
           );
         })}
         {postbox.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ opacity: gif ? "1" : "0" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ opacity: gif ? "1" : "0" }}>
               <Image
                 priority
                 src={e[0]}

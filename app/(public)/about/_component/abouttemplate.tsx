@@ -37,10 +37,7 @@ export default function AboutTemplate() {
   return (
     <>
       {contactLoad < 1 && <Loading />}
-      <div
-        className={styles.page}
-        style={{ opacity: contactLoad === 1 ? "1" : "0" }}
-      >
+      <div className={styles.page} style={{ opacity: contactLoad === 1 ? "1" : "0" }}>
         <div className={styles.fullbox}>
           <div className={styles.ipadbox}>
             <div className={styles.nutimgbox}>
@@ -49,6 +46,7 @@ export default function AboutTemplate() {
                 src="/assets/about/about_1.webp"
                 alt="elements"
                 fill
+                unoptimized
                 onLoad={handleLoad}
                 sizes="(max-width: 1920px) 100%, 100%"
               />
