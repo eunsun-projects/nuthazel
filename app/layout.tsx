@@ -23,21 +23,19 @@ export const metadata = basicMeta;
 
 // test
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="kr" className={pretendard.className}>
       <body style={{ backgroundColor: "#eee7d1" }}>
         <QueryProvider>
-          <SetScreenSize />
-          <IfLandscape />
-          <NoMouse />
-          <Navbar />
-          <AudioProvider>{children}</AudioProvider>
-          <Footer />
+          <AudioProvider>
+            <SetScreenSize />
+            <IfLandscape />
+            <NoMouse />
+            <Navbar />
+            {children}
+            <Footer />
+          </AudioProvider>
         </QueryProvider>
         <GoogleAnalytics />
         <Analytics />

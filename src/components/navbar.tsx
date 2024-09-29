@@ -33,6 +33,7 @@ export default function Navbar() {
     if (!isPlaying) {
       setIsPlaying(true);
       if (audioRef.current) {
+        audioRef.current.volume = 0.5;
         audioRef.current.load();
         audioRef.current.muted = false;
         audioRef.current.loop = false; //반복
@@ -41,6 +42,7 @@ export default function Navbar() {
     } else {
       setIsPlaying(false);
       if (audioRef.current) {
+        audioRef.current.volume = 0.5;
         audioRef.current.muted = true;
         audioRef.current.loop = false; //반복
         audioRef.current.pause();
@@ -153,7 +155,9 @@ export default function Navbar() {
               WebkitTextStroke: isPlaying ? "2px var(--color)" : "2px transparent",
             }}
           >
-            <p onClick={handleMusicClick}>♪</p>
+            <p onClick={handleMusicClick} style={{ cursor: "pointer" }}>
+              ♪
+            </p>
           </div>
         </div>
 
