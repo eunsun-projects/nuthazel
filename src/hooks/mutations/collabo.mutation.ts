@@ -4,7 +4,7 @@ import { Collabo } from "@/types/NutHazel.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export interface CollaboMutationProps {
-  collabo: FormData;
+  collabo: FormData | Collabo;
   method: "POST" | "DELETE";
 }
 
