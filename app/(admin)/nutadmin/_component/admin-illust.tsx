@@ -1,10 +1,10 @@
 "use client";
 
 import styles from "@/styles/admin.module.css";
-import { Illust } from "@/types/NutHazel.type";
+import { Collabo, Illust, Toon } from "@/types/NutHazel.type";
 import { useState } from "react";
-import IllustCollabModal from "./illustcollabmodal";
 import List from "./list";
+import UpLoadModal from "./uploadmodal";
 
 interface AdminIllustProps {
   illustData: Illust[];
@@ -12,25 +12,16 @@ interface AdminIllustProps {
 
 export default function AdminIllust({ illustData }: AdminIllustProps) {
   const [modal, setModal] = useState(false);
-  const [currNum, setCurrNum] = useState<number | null>(null);
-  const [illustList, setIllustList] = useState(illustData);
+  const [selected, setSelected] = useState<Toon | Illust | Collabo | null>(null);
 
   const handleModal = () => {
     setModal(true);
-    setCurrNum(null);
+    setSelected(null);
   };
   return (
     <>
       <div className={styles.toonadminpage}>
-        {modal && (
-          <IllustCollabModal
-            type={"illust"}
-            setModal={setModal}
-            data={illustList}
-            currNum={currNum}
-            setToonList={setIllustList}
-          />
-        )}
+        {modal && <UpLoadModal type={"illust"} setModal={setModal} data={illustData} selected={selected} />}
 
         <div
           style={{
@@ -51,13 +42,7 @@ export default function AdminIllust({ illustData }: AdminIllustProps) {
             <p>목록</p>
           </div>
 
-          <List
-            data={illustList}
-            setModal={setModal}
-            setCurrNum={setCurrNum}
-            setList={setIllustList}
-            type={"illust"}
-          />
+          <List data={illustData} setModal={setModal} setSelected={setSelected} type={"illust"} />
         </div>
       </div>
     </>

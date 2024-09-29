@@ -39,9 +39,9 @@ export default function SideMenu({ setCategory, data }: SideMenuProps) {
       setCategory("illust");
     }
 
-    if (target.dataset.cate === "collab") {
-      router.push(pathname + "?" + createQueryString("id", "collab"));
-      setCategory("collab");
+    if (target.dataset.cate === "collabo") {
+      router.push(pathname + "?" + createQueryString("id", "collabo"));
+      setCategory("collabo");
     }
 
     if (target.dataset.cate === "toon") {
@@ -125,7 +125,7 @@ export default function SideMenu({ setCategory, data }: SideMenuProps) {
         <div data-cate={"illust"} onClick={handleMenu}>
           Illustration
         </div>
-        <div data-cate={"collab"} onClick={handleMenu}>
+        <div data-cate={"collabo"} onClick={handleMenu}>
           Collaboration
         </div>
         <div data-cate={"toon"} onClick={handleMenu}>

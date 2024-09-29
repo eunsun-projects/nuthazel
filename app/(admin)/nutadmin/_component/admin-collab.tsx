@@ -1,10 +1,10 @@
 "use client";
 
 import styles from "@/styles/admin.module.css";
-import { Collabo } from "@/types/NutHazel.type";
+import { Collabo, Illust, Toon } from "@/types/NutHazel.type";
 import { useState } from "react";
-import IllustCollabModal from "./illustcollabmodal";
 import List from "./list";
+import UpLoadModal from "./uploadmodal";
 
 interface AdminCollabProps {
   collabData: Collabo[];
@@ -12,25 +12,18 @@ interface AdminCollabProps {
 
 export default function AdminCollab({ collabData }: AdminCollabProps) {
   const [modal, setModal] = useState(false);
-  const [currNum, setCurrNum] = useState<number | null>(null);
-  const [collabList, setCollabList] = useState(collabData);
+  const [selected, setSelected] = useState<Toon | Illust | Collabo | null>(null);
 
   const handleModal = () => {
     setModal(true);
-    setCurrNum(null);
+    setSelected(null);
   };
 
   return (
     <>
       <div className={styles.toonadminpage}>
         {modal && (
-          <IllustCollabModal
-            type={"collab"}
-            setModal={setModal}
-            data={collabList}
-            currNum={currNum}
-            setToonList={setCollabList}
-          />
+          <UpLoadModal type={"collabo"} setModal={setModal} data={collabData} selected={selected} />
         )}
 
         <div
@@ -52,13 +45,7 @@ export default function AdminCollab({ collabData }: AdminCollabProps) {
             <p>목록</p>
           </div>
 
-          <List
-            data={collabList}
-            setModal={setModal}
-            setCurrNum={setCurrNum}
-            setList={setCollabList}
-            type={"collab"}
-          />
+          <List data={collabData} setModal={setModal} setSelected={setSelected} type={"collabo"} />
         </div>
       </div>
     </>

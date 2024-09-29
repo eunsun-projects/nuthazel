@@ -7,7 +7,7 @@ export default function Login() {
 
   return (
     <div onClick={loginWithProvider} style={{ cursor: "pointer", fontSize: "2rem" }}>
-      login
+      LOGIN
     </div>
   );
 }

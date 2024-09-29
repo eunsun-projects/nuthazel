@@ -1,9 +1,9 @@
 "use client";
 import styles from "@/styles/admin.module.css";
-import { Toon } from "@/types/NutHazel.type";
+import { Collabo, Illust, Toon } from "@/types/NutHazel.type";
 import { useState } from "react";
 import List from "./list";
-import ToonModal from "./toonmodal";
+import UpLoadModal from "./uploadmodal";
 
 interface AdminToonProps {
   toonData: Toon[];
@@ -11,20 +11,17 @@ interface AdminToonProps {
 
 export default function AdminToon({ toonData }: AdminToonProps) {
   const [modal, setModal] = useState(false);
-  const [currNum, setCurrNum] = useState<number | null>(null);
-  const [toonList, setToonList] = useState(toonData);
+  const [selected, setSelected] = useState<Toon | Illust | Collabo | null>(null);
 
   const handleModal = () => {
     setModal(true);
-    setCurrNum(null);
+    setSelected(null);
   };
 
   return (
     <>
       <div className={styles.toonadminpage}>
-        {modal && (
-          <ToonModal setModal={setModal} data={toonList} currNum={currNum} setToonList={setToonList} />
-        )}
+        {modal && <UpLoadModal type={"toon"} setModal={setModal} data={toonData} selected={selected} />}
 
         <div
           style={{
@@ -45,13 +42,7 @@ export default function AdminToon({ toonData }: AdminToonProps) {
             <p>목록</p>
           </div>
 
-          <List
-            data={toonList}
-            setModal={setModal}
-            setCurrNum={setCurrNum}
-            setList={setToonList}
-            type={"toon"}
-          />
+          <List data={toonData} setModal={setModal} setSelected={setSelected} type={"toon"} />
         </div>
       </div>
     </>
