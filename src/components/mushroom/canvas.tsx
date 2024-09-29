@@ -29,44 +29,39 @@ export default function CanvasComp({ classification }: CanvasCompProps) {
   );
 
   const handleClick = () => {
-    // console.log('되냐')
     if (classification === "main") {
-      // console.log('main')
       router.push("/work/collaboration?num=screenxyz");
     } else {
-      console.log("collabo");
       setModal(true);
       router.push(pathname + "?" + createQueryString("num", "screenxyz"));
     }
   };
 
   useEffect(() => {
+    if (classification === "main") return;
     const num = searchParams.get("num");
     if (num === "screenxyz") {
       setModal(true);
       router.push(pathname + "?" + createQueryString("num", "screenxyz"));
     }
-  }, [searchParams, router, pathname, createQueryString]);
+  }, [searchParams, router, pathname, createQueryString, classification]);
 
   return (
     <>
       {modal && <MushroomModal setModalOpen={setModal} />}
-      <div style={{ height: "100%", width: "100%" }}>
-        <Canvas>
-          <Scene classification={classification} handleClick={handleClick} />
-
-          <OrbitControls
-            enableZoom={false}
-            enableRotate={classification === "main" ? true : false}
-            enablePan={false}
-            target={[0, 0, 0]}
-            maxDistance={0}
-            minDistance={7}
-            minPolarAngle={1.4}
-            maxPolarAngle={0}
-          />
-        </Canvas>
-      </div>
+      <Canvas>
+        <Scene classification={classification} handleClick={handleClick} />
+        <OrbitControls
+          enableZoom={false}
+          enableRotate={classification === "main" ? true : false}
+          enablePan={false}
+          target={[0, 0, 0]}
+          maxDistance={0}
+          minDistance={7}
+          minPolarAngle={1.4}
+          maxPolarAngle={0}
+        />
+      </Canvas>
     </>
   );
 }

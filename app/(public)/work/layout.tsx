@@ -1,11 +1,6 @@
 import SetScreenSize from "@/components/setscreensize";
-import "../globals.css";
 
-export default function PortfolioLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PortfolioLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SetScreenSize />

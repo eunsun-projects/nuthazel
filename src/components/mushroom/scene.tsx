@@ -1,4 +1,5 @@
 "use client";
+
 import { PerspectiveCamera } from "@react-three/drei"; //R3F에 얹어서 효과같은 것들을 추가적으로 사용할 수 있도록 하는 라이브러리.
 import { useFrame, useLoader } from "@react-three/fiber"; //보통 react three를 말하면 요고.R3F로 줄여서도 부름. three를 리액트에 맞춰서 쓸 수 있게 하는 기본 라이브러리.
 import { useRef } from "react";

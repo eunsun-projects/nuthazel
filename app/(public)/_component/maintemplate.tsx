@@ -1,34 +1,15 @@
 "use client";
 
-import Loading from "@/app/loading";
-import CanvasComp from "@/components/mushroom/canvas";
 import styles from "@/styles/main.module.css";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { createRef, useEffect, useRef, useState } from "react";
+const CanvasComp = dynamic(() => import("@/components/mushroom/canvas"), {
+  ssr: false,
+});
 
-const dandelion = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-];
+const dandelion = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 const assetimg = [
   //오른쪽나무
   ["/assets/main/right_tree1_shadow.webp", "righttree1shadow"],
@@ -91,24 +72,22 @@ const cloudimg = [
   ["/assets/main/big_cloud.webp", "bigcloud"],
 ];
 
+const fadeInDelay = 500; // 각 div의 페이드인 애니메이션 간격
+const fadeOutDelay = 2000; // 모든 이미지가 나타난 후 다시 숨기기 전까지의 시간
+
 export default function MainTemplate() {
-  const [loadTrace, setLoadTrace] = useState(0);
+  // const [loadTrace, setLoadTrace] = useState(0);
   const [xy, setXy] = useState<{ x: number; y: number }[]>([]);
   const [smoke, setSmoke] = useState(0);
 
-  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(
-    smokeimg.map(() => createRef())
-  );
+  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(smokeimg.map(() => createRef()));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef2 = useRef<NodeJS.Timeout | null>(null);
   const timerRef3 = useRef<NodeJS.Timeout | null>(null);
 
-  const fadeInDelay = 500; // 각 div의 페이드인 애니메이션 간격
-  const fadeOutDelay = 2000; // 모든 이미지가 나타난 후 다시 숨기기 전까지의 시간
-
-  const handleImgLoaded = () => {
-    setLoadTrace((prev) => prev + 1);
-  };
+  // const handleImgLoaded = () => {
+  //   setLoadTrace((prev) => prev + 1);
+  // };
 
   const runAnimation = () => {
     smokeRefs.current.forEach((ref, index) => {
@@ -178,23 +157,15 @@ export default function MainTemplate() {
 
   return (
     <>
-      {loadTrace <
-        assetimg.length +
-          cloudimg.length +
-          smokeimg.length +
-          dandelion.length && <Loading />}
+      {/* {loadTrace < assetimg.length + cloudimg.length + smokeimg.length + dandelion.length && <Loading />} */}
       <div
         className={styles.mainpage}
-        style={{
-          opacity:
-            loadTrace ===
-            assetimg.length +
-              cloudimg.length +
-              smokeimg.length +
-              dandelion.length
-              ? "1"
-              : "0",
-        }}
+        // style={{
+        //   opacity:
+        //     loadTrace === assetimg.length + cloudimg.length + smokeimg.length + dandelion.length
+        //       ? "1"
+        //       : "0",
+        // }}
       >
         {xy.length === 20 &&
           dandelion.map((e, i) => {
@@ -212,7 +183,8 @@ export default function MainTemplate() {
                   src={"/assets/main/dandelion.webp"}
                   alt="elements"
                   fill
-                  onLoad={handleImgLoaded}
+                  unoptimized
+                  // onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               </div>
@@ -220,17 +192,14 @@ export default function MainTemplate() {
           })}
         {cloudimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               <Image
                 priority
                 src={e[0]}
                 alt="elements"
                 fill
-                onLoad={handleImgLoaded}
+                unoptimized
+                // onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
               />
             </div>
@@ -240,11 +209,7 @@ export default function MainTemplate() {
         <div className={styles.background}></div>
         {assetimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               {e[2] ? (
                 <Link
                   href={e[2]}
@@ -260,7 +225,8 @@ export default function MainTemplate() {
                     src={e[0]}
                     alt="elements"
                     fill
-                    onLoad={handleImgLoaded}
+                    unoptimized
+                    // onLoad={handleImgLoaded}
                     sizes="(max-width: 1920px) 100%, 100%"
                   />
                 </Link>
@@ -270,7 +236,8 @@ export default function MainTemplate() {
                   src={e[0]}
                   alt="elements"
                   fill
-                  onLoad={handleImgLoaded}
+                  unoptimized
+                  // onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               )}
@@ -288,7 +255,6 @@ export default function MainTemplate() {
             >
               <Link
                 href={e[2]}
-                prefetch={false}
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -300,7 +266,8 @@ export default function MainTemplate() {
                   src={e[0]}
                   alt="elements"
                   fill
-                  onLoad={handleImgLoaded}
+                  unoptimized
+                  // onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               </Link>
@@ -309,7 +276,7 @@ export default function MainTemplate() {
         })}
 
         <div className={styles.mushroom}>
-          <CanvasComp classification={"main"} />
+          <CanvasComp classification="main" />
         </div>
       </div>
     </>
