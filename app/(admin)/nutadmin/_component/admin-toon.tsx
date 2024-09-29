@@ -1,18 +1,18 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
 import styles from "@/styles/admin.module.css";
+import { Toon } from "@/types/NutHazel.type";
 import { useState } from "react";
 import List from "./list";
 import ToonModal from "./toonmodal";
 
 interface AdminToonProps {
-  data: NutHazelResponse["nuthazelall"] | null;
+  toonData: Toon[];
 }
 
-export default function AdminToon({ data }: AdminToonProps) {
+export default function AdminToon({ toonData }: AdminToonProps) {
   const [modal, setModal] = useState(false);
   const [currNum, setCurrNum] = useState<number | null>(null);
-  const [toonList, setToonList] = useState(data);
+  const [toonList, setToonList] = useState(toonData);
 
   const handleModal = () => {
     setModal(true);
@@ -23,12 +23,7 @@ export default function AdminToon({ data }: AdminToonProps) {
     <>
       <div className={styles.toonadminpage}>
         {modal && (
-          <ToonModal
-            setModal={setModal}
-            data={toonList}
-            currNum={currNum}
-            setToonList={setToonList}
-          />
+          <ToonModal setModal={setModal} data={toonList} currNum={currNum} setToonList={setToonList} />
         )}
 
         <div

@@ -1,18 +1,19 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
+
 import styles from "@/styles/admin.module.css";
+import { Illust } from "@/types/NutHazel.type";
 import { useState } from "react";
 import IllustCollabModal from "./illustcollabmodal";
 import List from "./list";
 
 interface AdminIllustProps {
-  data: NutHazelResponse["nuthazelall"] | null;
+  illustData: Illust[];
 }
 
-export default function AdminIllust({ data }: AdminIllustProps) {
+export default function AdminIllust({ illustData }: AdminIllustProps) {
   const [modal, setModal] = useState(false);
   const [currNum, setCurrNum] = useState<number | null>(null);
-  const [illustList, setIllustList] = useState(data);
+  const [illustList, setIllustList] = useState(illustData);
 
   const handleModal = () => {
     setModal(true);

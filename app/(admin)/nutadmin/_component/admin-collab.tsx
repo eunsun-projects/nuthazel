@@ -1,15 +1,19 @@
 "use client";
 
 import styles from "@/styles/admin.module.css";
+import { Collabo } from "@/types/NutHazel.type";
 import { useState } from "react";
 import IllustCollabModal from "./illustcollabmodal";
 import List from "./list";
 
-export default function AdminCollab() {
-  // console.log(data)
+interface AdminCollabProps {
+  collabData: Collabo[];
+}
+
+export default function AdminCollab({ collabData }: AdminCollabProps) {
   const [modal, setModal] = useState(false);
   const [currNum, setCurrNum] = useState<number | null>(null);
-  const [collabList, setCollabList] = useState(data);
+  const [collabList, setCollabList] = useState(collabData);
 
   const handleModal = () => {
     setModal(true);

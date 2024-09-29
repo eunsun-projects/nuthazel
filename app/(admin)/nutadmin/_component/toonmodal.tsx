@@ -1,22 +1,18 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
+
 import styles from "@/styles/admin.module.css";
+import { Toon } from "@/types/NutHazel.type";
 import convertToWebP from "@/utils/convertToWebp";
 import { useRef, useState } from "react";
 
 interface ToonModalProps {
   setModal: (modal: boolean) => void;
-  data: NutHazelResponse["nuthazelall"] | null;
+  data: Toon[];
   currNum: number | null;
   setToonList: (list: any) => void;
 }
 
-export default function ToonModal({
-  setModal,
-  data,
-  currNum,
-  setToonList,
-}: ToonModalProps) {
+export default function ToonModal({ setModal, data, currNum, setToonList }: ToonModalProps) {
   const [imgFiles, setImgFiles] = useState<File[] | null>(null);
   const [lastNum, setLastNum] = useState<number>(data ? data.length + 1 : 1); // index 와 다르게 데이터는 1부터 시작하므로
   const [fetching, setFetching] = useState(false);
@@ -31,19 +27,13 @@ export default function ToonModal({
   const handleSort = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (
-      confirm(
-        "정렬하시겠습니까? 파일명은 이름+숫자.확장자로 맞추어주세요. ex) name1.jpg혹은 name1.png"
-      )
+      confirm("정렬하시겠습니까? 파일명은 이름+숫자.확장자로 맞추어주세요. ex) name1.jpg혹은 name1.png")
     ) {
       if (imgFiles) {
         const copy = [...imgFiles];
         const sorted = copy.sort((a, b) => {
-          const matchA = a.name.match(
-            /(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/
-          );
-          const matchB = b.name.match(
-            /(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/
-          );
+          const matchA = a.name.match(/(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/);
+          const matchB = b.name.match(/(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/);
 
           const numberA = matchA ? parseInt(matchA[1], 10) : 0;
           const numberB = matchB ? parseInt(matchB[1], 10) : 0;
@@ -56,24 +46,20 @@ export default function ToonModal({
     }
   };
 
-  const handledelete =
-    (i: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      if (imgFiles) {
-        const copy = [...imgFiles];
-        copy.splice(i, 1);
-        setImgFiles(copy);
-      }
-    };
+  const handledelete = (i: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (imgFiles) {
+      const copy = [...imgFiles];
+      copy.splice(i, 1);
+      setImgFiles(copy);
+    }
+  };
 
   const handleImgFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
     if (files) {
       const fileArray = Array.from(files).map((file) => file);
       setImgFiles(fileArray);
-
-      // console.log(files)
-      // console.log(imgFilesRef.current);
     }
   };
 
@@ -126,10 +112,7 @@ export default function ToonModal({
         // formData 에 각 항목 추가
         formData.append("action", actionType);
         formData.append("isPublic", "true");
-        formData.append(
-          "num",
-          currNum !== null ? String(currNum) : String(lastNum)
-        );
+        formData.append("num", currNum !== null ? String(currNum) : String(lastNum));
         formData.append("title", title);
         formData.append("desc", desc);
         formData.append("keywords", keywords.join(","));
@@ -239,39 +222,15 @@ export default function ToonModal({
           <div>
             <div className={styles.toonformright}>
               <label>title</label>
-              <input
-                type="text"
-                name="title01"
-                required
-                placeholder={"타이틀을 입력하세요"}
-              ></input>
+              <input type="text" name="title01" required placeholder={"타이틀을 입력하세요"}></input>
 
               <label>설명</label>
-              <textarea
-                name="desc"
-                required
-                placeholder={"간단한 설명을 작성해주세요"}
-              />
+              <textarea name="desc" required placeholder={"간단한 설명을 작성해주세요"} />
               <label>키워드</label>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <input
-                  type="text"
-                  name="keyword1"
-                  required
-                  placeholder={"키워드1"}
-                ></input>
-                <input
-                  type="text"
-                  name="keyword2"
-                  required
-                  placeholder={"키워드2"}
-                ></input>
-                <input
-                  type="text"
-                  name="keyword3"
-                  required
-                  placeholder={"키워드3"}
-                ></input>
+                <input type="text" name="keyword1" required placeholder={"키워드1"}></input>
+                <input type="text" name="keyword2" required placeholder={"키워드2"}></input>
+                <input type="text" name="keyword3" required placeholder={"키워드3"}></input>
               </div>
             </div>
 
@@ -282,11 +241,7 @@ export default function ToonModal({
                 gap: "1rem",
               }}
             >
-              <input
-                className={styles.uploadbtn}
-                type="submit"
-                value="업로드하기"
-              ></input>
+              <input className={styles.uploadbtn} type="submit" value="업로드하기"></input>
               <div className={styles.admincrudbtn} onClick={handleClose}>
                 취소
               </div>

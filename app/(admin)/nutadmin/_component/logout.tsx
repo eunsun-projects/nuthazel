@@ -1,14 +1,13 @@
 "use client";
+
+import useAuth from "@/hooks/auth/auth.hook";
 import styles from "@/styles/admin.module.css";
-import { signOut } from "next-auth/react";
 
 export default function LogOut() {
+  const { logOut } = useAuth();
+
   return (
-    <div
-      onClick={() => signOut()}
-      className={styles.logbtn}
-      style={{ cursor: "pointer" }}
-    >
+    <div onClick={logOut} className={styles.logbtn} style={{ cursor: "pointer" }}>
       logout
     </div>
   );

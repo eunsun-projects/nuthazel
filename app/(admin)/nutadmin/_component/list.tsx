@@ -1,23 +1,18 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
+
 import styles from "@/styles/admin.module.css";
+import { Collabo, Illust, Toon } from "@/types/NutHazel.type";
 import { useState } from "react";
 
 interface ListProps {
-  data: NutHazelResponse["nuthazelall"] | null;
+  data: Toon[] | Illust[] | Collabo[];
   setModal: (modal: boolean) => void;
   setCurrNum: (num: number) => void;
   setList: (list: any) => void;
   type: string;
 }
 
-export default function List({
-  data,
-  setModal,
-  setCurrNum,
-  setList,
-  type,
-}: ListProps) {
+export default function List({ data, setModal, setCurrNum, setList, type }: ListProps) {
   const [fetching, setFetching] = useState(false);
 
   const handleClick = (num: number) => () => {
@@ -26,7 +21,7 @@ export default function List({
     // console.log(num)
   };
 
-  const deleteFetch = (item: FirebaseFirestore.DocumentData) => async () => {
+  const deleteFetch = (item: Toon | Illust | Collabo) => async () => {
     if (confirm("해당 항목을 삭제하시겠습니까?")) {
       try {
         // fetch 과정 시작할때 true
@@ -34,7 +29,7 @@ export default function List({
         const formData = new FormData();
 
         formData.append("action", "toondelete");
-        formData.append("num", item.num);
+        formData.append("num", String(item.num));
         formData.append("title", item.title);
 
         const req = {
@@ -112,13 +107,8 @@ export default function List({
                 <p>설명 : {e.desc}</p>
                 <p>키워드 : {e.keywords.join(", ")}</p>
 
-                <div
-                  style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
-                >
-                  <div
-                    className={styles.admincrudbtn}
-                    onClick={handleClick(e.num)}
-                  >
+                <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+                  <div className={styles.admincrudbtn} onClick={handleClick(Number(e.num))}>
                     수정
                   </div>
                   <div className={styles.admincrudbtn} onClick={deleteFetch(e)}>

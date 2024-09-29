@@ -1,13 +1,14 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
+
 import styles from "@/styles/admin.module.css";
+import { Collabo, Illust } from "@/types/NutHazel.type";
 import convertToWebP from "@/utils/convertToWebp";
 import urlRegexTest from "@/utils/urlRegexTest";
 import { useRef, useState } from "react";
 
 interface IllustCollabModalProps {
   setModal: (modal: boolean) => void;
-  data: NutHazelResponse["nuthazelall"] | null;
+  data: Illust[] | Collabo[];
   currNum: number | null;
   setToonList: (toonList: any) => void;
   type: string;
@@ -35,12 +36,8 @@ export default function IllustCollabModal({
       console.log("정렬됨");
       const copy = [...imgFiles];
       const sorted = copy.sort((a, b) => {
-        const matchA = a.name.match(
-          /(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/
-        );
-        const matchB = b.name.match(
-          /(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/
-        );
+        const matchA = a.name.match(/(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/);
+        const matchB = b.name.match(/(\d+)(?=\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$)/);
 
         const numberA = matchA ? parseInt(matchA[1], 10) : 0;
         const numberB = matchB ? parseInt(matchB[1], 10) : 0;
@@ -55,24 +52,19 @@ export default function IllustCollabModal({
 
   const handleCollabSort = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (
-      confirm(
-        "첫번째 파일(파일명0.png)는 배경이 투명해야 합니다, 확인하셨습니까"
-      )
-    ) {
+    if (confirm("첫번째 파일(파일명0.png)는 배경이 투명해야 합니다, 확인하셨습니까")) {
       sorting();
     }
   };
 
-  const handledelete =
-    (i: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      if (imgFiles) {
-        const copy = [...imgFiles];
-        copy.splice(i, 1);
-        setImgFiles(copy);
-      }
-    };
+  const handledelete = (i: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (imgFiles) {
+      const copy = [...imgFiles];
+      copy.splice(i, 1);
+      setImgFiles(copy);
+    }
+  };
 
   const handleImgFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
@@ -152,27 +144,18 @@ export default function IllustCollabModal({
           if (type === "illust") {
             actionType = "illustupload";
             folder = "illustration";
-            formData.append(
-              "pageurl",
-              `/work/${folder}?num=${String(lastNum)}`
-            );
+            formData.append("pageurl", `/work/${folder}?num=${String(lastNum)}`);
           } else {
             actionType = "collabupload";
             folder = "collaboration";
-            formData.append(
-              "pageurl",
-              `/work/${folder}?num=${String(lastNum)}`
-            );
+            formData.append("pageurl", `/work/${folder}?num=${String(lastNum)}`);
           }
         }
 
         // formData 에 각 항목 추가
         formData.append("action", actionType);
         formData.append("isPublic", "true");
-        formData.append(
-          "num",
-          currNum !== null ? String(currNum) : String(lastNum)
-        );
+        formData.append("num", currNum !== null ? String(currNum) : String(lastNum));
         formData.append("title", title);
         formData.append("desc", desc);
         formData.append("keywords", keywords.join(","));
@@ -197,9 +180,7 @@ export default function IllustCollabModal({
               formData.append("linkhref", linkHref);
               // 주소 검증 통과 못하면(잘못썼을경우)
             } else {
-              alert(
-                "링크 주소를 다시 확인해주세요(무언가를 빠트린것 같아요...)"
-              );
+              alert("링크 주소를 다시 확인해주세요(무언가를 빠트린것 같아요...)");
               // 아래 setState 안하면 계속 데이터 전송중 떠있음
               setFetching(false);
               // 검증 통과 못했기 때문에 submit 함수 종료
@@ -295,10 +276,7 @@ export default function IllustCollabModal({
               <label htmlFor="image">
                 <div className={styles.fileselectbtn}>
                   <span style={{ fontWeight: "bold" }}>파일선택하기</span>
-                  <span>
-                    {type === "collab" &&
-                      "첫번째 파일(파일명0.png)는 배경이 투명해야 합니다"}
-                  </span>
+                  <span>{type === "collab" && "첫번째 파일(파일명0.png)는 배경이 투명해야 합니다"}</span>
                 </div>
               </label>
               {type === "collab" ? (
@@ -332,11 +310,7 @@ export default function IllustCollabModal({
               </div>
             </div>
             {type === "collab" && (
-              <button
-                className={styles.alignbtn}
-                onClick={handleCollabSort}
-                style={{ cursor: "pointer" }}
-              >
+              <button className={styles.alignbtn} onClick={handleCollabSort} style={{ cursor: "pointer" }}>
                 정렬
               </button>
             )}
@@ -345,58 +319,26 @@ export default function IllustCollabModal({
           <div>
             <div className={styles.toonformright}>
               <label>title</label>
-              <input
-                type="text"
-                name="title01"
-                required
-                placeholder={"타이틀을 입력하세요"}
-              ></input>
+              <input type="text" name="title01" required placeholder={"타이틀을 입력하세요"}></input>
 
               <label>설명</label>
-              <textarea
-                name="desc"
-                required
-                placeholder={"간단한 설명을 작성해주세요"}
-              />
+              <textarea name="desc" required placeholder={"간단한 설명을 작성해주세요"} />
 
               {type === "collab" && (
                 <>
                   <label>링크</label>
                   <div className={styles.linkbox}>
-                    <input
-                      type="text"
-                      name="linktitle"
-                      placeholder={"표시할문구"}
-                    ></input>
-                    <input
-                      type="text"
-                      name="linkhref"
-                      placeholder={"링크주소"}
-                    ></input>
+                    <input type="text" name="linktitle" placeholder={"표시할문구"}></input>
+                    <input type="text" name="linkhref" placeholder={"링크주소"}></input>
                   </div>
                 </>
               )}
 
               <label>키워드</label>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <input
-                  type="text"
-                  name="keyword1"
-                  required
-                  placeholder={"키워드1"}
-                ></input>
-                <input
-                  type="text"
-                  name="keyword2"
-                  required
-                  placeholder={"키워드2"}
-                ></input>
-                <input
-                  type="text"
-                  name="keyword3"
-                  required
-                  placeholder={"키워드3"}
-                ></input>
+                <input type="text" name="keyword1" required placeholder={"키워드1"}></input>
+                <input type="text" name="keyword2" required placeholder={"키워드2"}></input>
+                <input type="text" name="keyword3" required placeholder={"키워드3"}></input>
               </div>
             </div>
 
@@ -407,11 +349,7 @@ export default function IllustCollabModal({
                 gap: "1rem",
               }}
             >
-              <input
-                className={styles.uploadbtn}
-                type="submit"
-                value="업로드하기"
-              ></input>
+              <input className={styles.uploadbtn} type="submit" value="업로드하기"></input>
               <div className={styles.admincrudbtn} onClick={handleClose}>
                 취소
               </div>

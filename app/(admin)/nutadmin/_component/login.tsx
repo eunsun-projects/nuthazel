@@ -1,12 +1,13 @@
-'use client'
-import { signIn } from "next-auth/react"
+"use client";
 
-export default function Login(){
-    return(
-        <div 
-            onClick={()=>signIn()}
-            style={{cursor: "pointer", fontSize: '2rem'}}
-        >login
-        </div>
-    )
-} 
+import useAuth from "@/hooks/auth/auth.hook";
+
+export default function Login() {
+  const { loginWithProvider } = useAuth();
+
+  return (
+    <div onClick={loginWithProvider} style={{ cursor: "pointer", fontSize: "2rem" }}>
+      login
+    </div>
+  );
+}
