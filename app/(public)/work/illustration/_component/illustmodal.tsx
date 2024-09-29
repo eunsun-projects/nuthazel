@@ -40,9 +40,9 @@ export default function IllustModal({ setModal, illust }: ModalProps) {
     router.push("/work");
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // console.log(e.target)
-    if (e.target === allRef.current || e.target === xRef.current) {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement | HTMLImageElement>) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === "IMG" || target === xRef.current) {
       setModal(false);
       router.push("/work");
     }
@@ -55,21 +55,11 @@ export default function IllustModal({ setModal, illust }: ModalProps) {
     }
     // 직접 접속 일 경우 처음에 한번만 쿼리스트링 추가
     if (searchParams.size === 0) {
-      router.push(
-        pathname + "?" + createQueryString("num", String(illust.length))
-      );
+      router.push(pathname + "?" + createQueryString("num", String(illust.length)));
       setCurrIndex(0);
       setModal(true);
     }
-  }, [
-    searchParams,
-    createQueryString,
-    router,
-    pathname,
-    illust.length,
-    setModal,
-    setCurrIndex,
-  ]);
+  }, [searchParams, createQueryString, router, pathname, illust.length, setModal, setCurrIndex]);
 
   //직접 접속했을때
   useEffect(() => {
@@ -82,15 +72,7 @@ export default function IllustModal({ setModal, illust }: ModalProps) {
       router.push(pathname + "?" + createQueryString("num", num));
       setModal(true);
     }
-  }, [
-    searchParams,
-    createQueryString,
-    router,
-    pathname,
-    illust.length,
-    setModal,
-    setCurrIndex,
-  ]);
+  }, [searchParams, createQueryString, router, pathname, illust.length, setModal, setCurrIndex]);
 
   // 넘길때마다 주소가 바뀌게..
   useEffect(() => {
@@ -106,11 +88,7 @@ export default function IllustModal({ setModal, illust }: ModalProps) {
       <div ref={xRef} className={styles.xbtn}>
         <div className={styles.titleimgbox}>
           <div className={styles.modaltitle}>
-            <img
-              className={styles.modaltitleimg}
-              src="/assets/illust/pot.webp"
-              alt="pot"
-            ></img>
+            <img className={styles.modaltitleimg} src="/assets/illust/pot.webp" alt="pot"></img>
           </div>
         </div>
         <span onClick={handleX}>X</span>
