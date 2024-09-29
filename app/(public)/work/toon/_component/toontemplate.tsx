@@ -1,5 +1,4 @@
 "use client";
-import Loading from "@/app/loading";
 import ToonGridLoading from "@/components/toongridloading";
 import ToonLoading from "@/components/toonloading";
 import { useToonQuery } from "@/hooks/queries/toon.query";
@@ -63,7 +62,7 @@ export default function ToonTemplate() {
       .map(() => copy.splice(0, 6));
   }, [toon]);
 
-  const [loadTrace, setLoadTrace] = useState(0);
+  // const [loadTrace, setLoadTrace] = useState(0);
   const [toonCategory, setToonCategory] = useState(totalContents[0]);
   const [showModal, setShowModal] = useState(false);
   const [selectedNum, setSelectedNum] = useState<number | null>(null);
@@ -89,11 +88,6 @@ export default function ToonTemplate() {
     setShowModal(true);
     setSelectedNum(i);
     router.push(toonCategory[i].pageurl);
-    // router.push(pathname + '?' + createQueryString('num', String(i)));
-  };
-
-  const handleImgLoaded = () => {
-    setLoadTrace((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -107,9 +101,7 @@ export default function ToonTemplate() {
 
       router.push(pathname + "?" + createQueryString("num", num));
 
-      const innerIndex = totalContents[index].findIndex(
-        (e) => e.num === Number(num)
-      );
+      const innerIndex = totalContents[index].findIndex((e) => e.num === Number(num));
       setSelectedNum(innerIndex);
       setShowModal(true);
     }
@@ -145,23 +137,15 @@ export default function ToonTemplate() {
     const timer = setTimeout(() => {
       setGridPage(true);
       clearTimeout(timer);
-    }, 3000);
+    }, 100);
   }, []);
-
-  const isLoading = useMemo(() => {
-    return loadTrace < assetimg.length;
-  }, [loadTrace]);
 
   return (
     <>
-      {isLoading && <Loading />}
       <div
         className={styles.page}
         style={{
-          opacity: isLoading ? "0" : "1",
-          backgroundImage: gridPage
-            ? "url(/assets/toon/background/poketback.webp)"
-            : "none",
+          backgroundImage: gridPage ? "url(/assets/toon/background/poketback.webp)" : "none",
           backgroundRepeat: gridPage ? "repeat" : "no-repeat",
         }}
       >
@@ -177,28 +161,19 @@ export default function ToonTemplate() {
                   alt="elements"
                   fill
                   sizes="(max-width: 1920px) 100%, 100%"
-                  onLoad={handleImgLoaded}
+                  unoptimized
                 />
               </div>
             );
           })}
         {gridPage && toonLoad < toonCategory.length && <ToonGridLoading />}
-        {showModal && (
-          <ToonModal
-            setShowModal={setShowModal}
-            toonCon={toonCategory[selectedNum ?? 0]}
-          />
-        )}
+        {showModal && <ToonModal setShowModal={setShowModal} toonCon={toonCategory[selectedNum ?? 0]} />}
         {gridPage && (
           <>
             <div className={styles.toonbox}>
               {toonCategory.map((e, i) => {
                 return (
-                  <div
-                    onClick={handleClick(i)}
-                    key={i}
-                    className={styles.imgdiv}
-                  >
+                  <div onClick={handleClick(i)} key={i} className={styles.imgdiv}>
                     <div className={styles.img}>
                       <Image
                         priority
@@ -206,14 +181,12 @@ export default function ToonTemplate() {
                         style={{
                           objectFit: "contain",
                           borderRadius: "0",
-                          visibility:
-                            toonLoad === toonCategory.length
-                              ? "visible"
-                              : "hidden",
+                          // visibility: toonLoad === toonCategory.length ? "visible" : "hidden",
                         }}
                         alt="elements"
                         fill
                         sizes="(max-width: 1920px) 100%, 100%"
+                        unoptimized
                         onLoad={handletoonload}
                       />
                     </div>
