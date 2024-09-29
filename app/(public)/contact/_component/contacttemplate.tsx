@@ -1,6 +1,5 @@
 "use client";
 
-import Loading from "@/app/loading";
 import styles from "@/styles/contact.module.css";
 import isMobile from "@/utils/isMobile";
 import Image from "next/image";
@@ -81,14 +80,9 @@ const cloudimg = [
 ];
 
 export default function ContactTemplate() {
-  const [loadTrace, setLoadTrace] = useState(0);
   const [gif, setGif] = useState(false);
   const [mobile, setMobile] = useState(false);
   const [xy, setXy] = useState<{ x: number; y: number }[]>([]);
-
-  const handleImgLoaded = () => {
-    setLoadTrace((prev) => prev + 1);
-  };
 
   useEffect(() => {
     if (isMobile()) {
@@ -126,16 +120,7 @@ export default function ContactTemplate() {
 
   return (
     <>
-      {loadTrace < assetimg.length + assetstar.length + postbox.length + cloudimg.length && <Loading />}
-      <div
-        className={styles.page}
-        style={{
-          opacity:
-            loadTrace === assetimg.length + assetstar.length + postbox.length + +cloudimg.length
-              ? "1"
-              : "0",
-        }}
-      >
+      <div className={styles.page}>
         <EmailForm gif={gif} setGif={setGif} mobile={mobile} />
         {xy.length === assetstar.length &&
           assetstar.map((e, i) => {
@@ -154,7 +139,6 @@ export default function ContactTemplate() {
                   alt="elements"
                   fill
                   unoptimized
-                  onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               </div>
@@ -168,7 +152,6 @@ export default function ContactTemplate() {
                 src={e[0]}
                 alt="elements"
                 fill
-                onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
                 unoptimized
               />
@@ -183,7 +166,6 @@ export default function ContactTemplate() {
                 src={e[0]}
                 alt="elements"
                 fill
-                onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
                 unoptimized
               />
@@ -198,7 +180,6 @@ export default function ContactTemplate() {
                 src={e[0]}
                 alt="elements"
                 fill
-                onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
                 unoptimized
               />

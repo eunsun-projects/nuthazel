@@ -1,6 +1,5 @@
 "use client";
 
-import Loading from "@/app/loading";
 import styles from "@/styles/about.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,11 +18,6 @@ const fullText = `새로운  무언가를 시작하기 전에,
 export default function AboutTemplate() {
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
-  const [contactLoad, setContactLoad] = useState(0);
-
-  const handleLoad = () => {
-    setContactLoad((prev) => prev + 1);
-  };
 
   useEffect(() => {
     if (index < fullText.length) {
@@ -36,8 +30,7 @@ export default function AboutTemplate() {
 
   return (
     <>
-      {contactLoad < 1 && <Loading />}
-      <div className={styles.page} style={{ opacity: contactLoad === 1 ? "1" : "0" }}>
+      <div className={styles.page}>
         <div className={styles.fullbox}>
           <div className={styles.ipadbox}>
             <div className={styles.nutimgbox}>
@@ -47,7 +40,6 @@ export default function AboutTemplate() {
                 alt="elements"
                 fill
                 unoptimized
-                onLoad={handleLoad}
                 sizes="(max-width: 1920px) 100%, 100%"
               />
             </div>
