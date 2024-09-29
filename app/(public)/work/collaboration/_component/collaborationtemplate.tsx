@@ -1,10 +1,9 @@
 "use client";
 
-import Loading from "@/app/loading";
 import CollabLoading from "@/components/collabloading";
 import CanvasComp from "@/components/mushroom/canvas";
-import { useCollaboQuery } from "@/hooks/queries";
 import styles from "@/styles/collabo.module.css";
+import { Collabo } from "@/types/NutHazel.type";
 import findParentArrayIndex from "@/utils/findParentArrayIndex";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,9 +38,11 @@ const assetimg = [
 ];
 const thumb = ["thumb0", "thumb1", "thumb2", "thumb3", "thumb4", "thumb5"];
 
-export default function CollaborationTemplate() {
-  const { data: collabo } = useCollaboQuery();
+interface CollaboProps {
+  collabo: Collabo[];
+}
 
+export default function CollaborationTemplate({ collabo }: CollaboProps) {
   const router = useRouter();
   const pathname = usePathname(); //해당 페이지 url
   const searchParams = useSearchParams(); //쿼리스트링
@@ -55,8 +56,8 @@ export default function CollaborationTemplate() {
   }, [collabo]);
 
   //페이지네이션 만들때 6개씩 끊는 함수 추가
-  const [loadTrace, setLoadTrace] = useState(0);
-  const [collaboration, setCollaboration] = useState(totalContents[0]);
+  // const [loadTrace, setLoadTrace] = useState(0);
+  const [selectedCollaboration, setSelectedCollaboration] = useState(collabo[0]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [curr, setCurr] = useState(0);
@@ -86,12 +87,12 @@ export default function CollaborationTemplate() {
     setModalOpen(true);
     setSelectedIndex(i);
     // router.push(pathname + '?' + createQueryString('num', String(i)));
-    router.push(collaboration[i].pageurl);
+    router.push(collabo[i].pageurl);
   };
 
-  const handleImgLoaded = () => {
-    setLoadTrace((prev) => prev + 1);
-  };
+  // const handleImgLoaded = () => {
+  //   setLoadTrace((prev) => prev + 1);
+  // };
 
   // 직접 url 로 접속했을때 쿼리스트링 설정
   useEffect(() => {
@@ -102,56 +103,37 @@ export default function CollaborationTemplate() {
         // index 는 totalContents 에서 최종 아이템을 포함하는 배열의 인덱스임
         const index = findParentArrayIndex(totalContents, Number(num));
         setIndexing(index);
-        setCollaboration(totalContents[index]);
+        setSelectedCollaboration(collabo[index]);
 
         router.push(pathname + "?" + createQueryString("num", num));
 
-        const innerIndex = totalContents[index].findIndex(
-          (e) => e.num === Number(num)
-        );
+        const innerIndex = totalContents[index].findIndex((e) => e.num === Number(num));
         setSelectedIndex(innerIndex);
 
         setModalOpen(true);
       }
     }
-  }, [
-    searchParams,
-    collabo,
-    totalContents,
-    router,
-    pathname,
-    createQueryString,
-  ]);
+  }, [searchParams, collabo, totalContents, router, pathname, createQueryString]);
 
   // indexing 은 전체 totalContents 의 각 배열의 index 와 일치해야 함!
   useEffect(() => {
     // 쿼리스트링으로 직접 들어오지 않았을때만 수행
     if (searchParams.size === 0) {
-      setCollaboration(totalContents[indexing]);
+      setSelectedCollaboration(collabo[indexing]);
     }
-  }, [
-    indexing,
-    searchParams,
-    totalContents,
-    router,
-    pathname,
-    createQueryString,
-  ]);
+  }, [indexing, searchParams, collabo, router, pathname, createQueryString]);
 
   return (
     <>
-      {loadTrace < assetimg.length && <Loading />}
+      {/* {loadTrace < assetimg.length && <Loading />} */}
       {modalOpen && (
         <CollaboModal
           setModalOpen={setModalOpen}
-          collabocontents={collaboration[selectedIndex ?? 0]}
+          collabocontents={selectedCollaboration}
           setQueryNum={setQueryNum}
         />
       )}
-      <div
-        className={styles.page}
-        style={{ opacity: loadTrace === assetimg.length ? "1" : "0" }}
-      >
+      <div className={styles.page}>
         <div className={styles.frame0} style={{ position: "absolute" }}>
           <Image
             priority
@@ -167,34 +149,28 @@ export default function CollaborationTemplate() {
 
         {assetimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               <Image
                 priority
                 src={e[0]}
                 alt="elements"
                 fill
-                onLoad={handleImgLoaded}
+                unoptimized
+                // onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
               />
-              {collaboration[i] && (
+              {collabo[i] && (
                 <div className={styles[thumb[i]]} onClick={handleModalOpen(i)}>
-                  {collabLoad < collaboration.length && <CollabLoading />}
+                  {collabLoad < collabo.length && <CollabLoading />}
                   <Image
                     priority
-                    src={collaboration[i].imgurl[0]}
+                    src={collabo[i].imgurl[0]}
                     alt="elements"
                     fill
                     sizes="(max-width: 1920px) 100%, 100%"
                     onLoad={handlecollabloading}
                     style={{
-                      visibility:
-                        collabLoad >= collaboration.length
-                          ? "visible"
-                          : "hidden",
+                      visibility: collabLoad >= collabo.length ? "visible" : "hidden",
                     }}
                   />
                 </div>
