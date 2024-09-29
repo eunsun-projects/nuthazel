@@ -6,7 +6,6 @@ export const metadata = basicMeta;
 export const viewport = basicViewport;
 
 export default function WorkPage() {
-  // 감싸는 div 수정 요망
   return (
     <div className={styles.page}>
       <WorkTemplate />

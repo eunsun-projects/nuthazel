@@ -1,6 +1,5 @@
 "use client";
 
-import Loading from "@/app/loading";
 import styles from "@/styles/work.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,11 +22,7 @@ const assetimg = [
   ["/assets/work/mortar_shadow.webp", "mortarshadow"],
   ["/assets/work/mortar.webp", "mortar"],
   //클릭액자
-  [
-    "/assets/work/clickframe_shadow.webp",
-    "clickframeshadow",
-    "/work/collaboration",
-  ],
+  ["/assets/work/clickframe_shadow.webp", "clickframeshadow", "/work/collaboration"],
   ["/assets/work/clickframe.webp", "clickframe", "/work/collaboration"],
   //메모지
   ["/assets/work/memo_shadow.webp", "memoshadow"],
@@ -94,22 +89,21 @@ const menu = [
   },
 ];
 
-export default function WorkTemplate() {
-  const [bubble, setBubble] = useState(false);
-  const [loadTrace, setLoadTrace] = useState(0);
-  const [smoke, setSmoke] = useState(0);
+const fadeInDelay = 500; // 각 div의 페이드인 애니메이션 간격
+const fadeOutDelay = 2000; // 모든 이미지가 나타난 후 다시 숨기기 전까지의 시간
 
+export default function WorkTemplate() {
+  // const [loadTrace, setLoadTrace] = useState(0);
+  const [smoke, setSmoke] = useState(0);
+  const [bubble, setBubble] = useState(false);
   const smokeRefs = useRef(potsmoke.map(() => createRef<HTMLDivElement>()));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef2 = useRef<NodeJS.Timeout | null>(null);
   const timerRef3 = useRef<NodeJS.Timeout | null>(null);
 
-  const fadeInDelay = 500; // 각 div의 페이드인 애니메이션 간격
-  const fadeOutDelay = 2000; // 모든 이미지가 나타난 후 다시 숨기기 전까지의 시간
-
-  const handleImgLoaded = () => {
-    setLoadTrace((prev) => prev + 1);
-  };
+  // const handleImgLoaded = () => {
+  //   setLoadTrace((prev) => prev + 1);
+  // };
 
   const runAnimation = useCallback(() => {
     smokeRefs.current.forEach((ref, index) => {
@@ -136,10 +130,7 @@ export default function WorkTemplate() {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setBubble(true);
-    }, 400); // 400으로 변경
-
+    setBubble(true);
     runAnimation(); // 첫 로드 시 애니메이션 시작
 
     return () => {
@@ -158,20 +149,16 @@ export default function WorkTemplate() {
 
   return (
     <>
-      {loadTrace < assetimg.length + potsmoke.length && <Loading />}
+      {/* {loadTrace < assetimg.length + potsmoke.length && <Loading />} */}
       <div
         className={styles.page}
-        style={{
-          opacity: loadTrace === assetimg.length + potsmoke.length ? "1" : "0",
-        }}
+        // style={{
+        //   opacity: loadTrace === assetimg.length + potsmoke.length ? "1" : "0",
+        // }}
       >
         {assetimg.map((e, i) => {
           return (
-            <div
-              key={i}
-              className={styles[e[1]]}
-              style={{ position: "absolute" }}
-            >
+            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
               {e[2] ? (
                 <Link
                   href={e[2]}
@@ -188,7 +175,8 @@ export default function WorkTemplate() {
                     src={e[0]}
                     alt="elements"
                     fill
-                    onLoad={handleImgLoaded}
+                    // onLoad={handleImgLoaded}
+                    unoptimized
                     sizes="(max-width: 1920px) 100%, 100%"
                   ></Image>
                 </Link>
@@ -198,7 +186,8 @@ export default function WorkTemplate() {
                   src={e[0]}
                   alt="elements"
                   fill
-                  onLoad={handleImgLoaded}
+                  // onLoad={handleImgLoaded}
+                  unoptimized
                   sizes="(max-width: 1920px) 100%, 100%"
                 ></Image>
               )}
@@ -228,7 +217,8 @@ export default function WorkTemplate() {
                   src={e[0]}
                   alt="elements"
                   fill
-                  onLoad={handleImgLoaded}
+                  // onLoad={handleImgLoaded}
+                  unoptimized
                   sizes="(max-width: 1920px) 100%, 100%"
                 ></Image>
               </Link>
@@ -240,10 +230,7 @@ export default function WorkTemplate() {
           menu.map((e, i) => {
             return (
               <Link key={i} href={e.url}>
-                <div
-                  className={`${styles.bubblebox} ${styles[e.title]}`}
-                  style={{ position: "absolute" }}
-                >
+                <div className={`${styles.bubblebox} ${styles[e.title]}`} style={{ position: "absolute" }}>
                   <div className={styles.bubble}>
                     <div className={styles.bubblecong}></div>
                     <div className={styles.bubblecong}></div>

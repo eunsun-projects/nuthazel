@@ -256,7 +256,7 @@
 .bubblebox {
   display: flex;
   align-items: center;
-  animation: slow 0.5s linear forwards;
+  animation: slow 0.4s linear forwards;
 }
 @keyframes slow {
   0% {
