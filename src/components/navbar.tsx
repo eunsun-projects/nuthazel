@@ -1,54 +1,45 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
-import styles from "@/app/page.module.css";
-import { useAudio } from "@/context/audiocontext";
+
+import { useAudio } from "@/contexts/audiocontext";
+import { menus } from "@/data/menus";
+import { useCollaboQuery, useIllustQuery, useToonQuery } from "@/hooks/queries";
+import styles from "@/styles/home.module.css";
+import { NutHazelAll } from "@/types/NutHazel.type";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Hamberger from "./hamberger";
 import Search from "./search";
-// import { usePathname } from 'next/navigation';
-
-export const getNutAll = async (): Promise<NutHazelResponse | null> => {
-  try {
-    const req = {
-      method: "GET",
-      cache: "no-store", //매번 새로 데이터 받아오기
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_POST_TOKEN}`,
-      },
-    };
-
-    const response = await fetch(`/api/nutget`, req as RequestInit);
-
-    if (response.ok) {
-      const result: NutHazelResponse = await response.json(); //응답 body를 .json(풀어헤쳐서) result에 담아라.
-      console.log("검색용 데이터 수신 성공");
-
-      return result;
-    } else {
-      console.log("검색용 데이터 수신 실패", response.statusText);
-      return null;
-    }
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};
 
 export default function Navbar() {
-  const [innerNav, setInnerNav] = useState(false);
-  const [searchDb, setSearchDb] = useState<
-    NutHazelResponse["nuthazelall"] | null
-  >(null);
+  const {
+    data: illust,
+    isLoading: illustLoading,
+    error: illustError,
+  } = useIllustQuery();
+  const {
+    data: collabo,
+    isLoading: collaboLoading,
+    error: collaboError,
+  } = useCollaboQuery();
+  const {
+    data: toon,
+    isLoading: toonLoading,
+    error: toonError,
+  } = useToonQuery();
+
   const [isOpen, setIsOpen] = useState(0);
-  const [mobile, setMobile] = useState<boolean | null>(null);
   const { isPlaying, setIsPlaying } = useAudio();
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const collabpath = usePathname();
-  // console.log(collabpath)
+  const searchDb: NutHazelAll | null = useMemo(() => {
+    if (illust && collabo && toon) {
+      return [...illust, ...collabo, ...toon, ...menus];
+    }
+    return null;
+  }, [illust, collabo, toon]);
+
+  // console.log("searchDb ====>", searchDb);
 
   const handleMusicClick = () => {
     if (!isPlaying) {
@@ -79,31 +70,6 @@ export default function Navbar() {
       setIsOpen(2);
     }
   };
-
-  useEffect(() => {
-    if (collabpath === "/about" || collabpath === "/contact") {
-      setInnerNav(false);
-    }
-  }, [collabpath]);
-
-  useEffect(() => {
-    const isMobile = () => {
-      return /Android|iPhone|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-    }; // =========> mobile device check function
-
-    !isMobile() ? setMobile(false) : setMobile(true);
-
-    getNutAll()
-      .then((data) => {
-        // console.log(data)
-        if (data) {
-          setSearchDb(data.nuthazelall);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   return (
     <>

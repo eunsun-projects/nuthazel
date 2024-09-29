@@ -1,11 +1,12 @@
 "use client";
-import { NutHazelResponse } from "@/app/api/nutget/route";
-import styles from "@/app/page.module.css";
+
+import styles from "@/styles/home.module.css";
+import { NutHazelAll } from "@/types/NutHazel.type";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 interface SearchProps {
-  searchDb: NutHazelResponse["nuthazelall"];
+  searchDb: NutHazelAll;
 }
 
 export default function Search({ searchDb }: SearchProps) {
@@ -80,9 +81,13 @@ export default function Search({ searchDb }: SearchProps) {
               return null;
             }
           });
-          resultArr = mapped.filter((e) => {
-            if (e !== null) return e;
-          }) as { keywords: string; title: string; pageurl: string }[];
+          resultArr = mapped
+            .filter((e): e is NonNullable<typeof e> => e !== null)
+            .map((e) => ({
+              keywords: e.keywords.join(", "),
+              title: e.title,
+              pageurl: e.pageurl,
+            }));
         });
 
         setSearchResult(resultArr);

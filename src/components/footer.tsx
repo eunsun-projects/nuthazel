@@ -1,5 +1,6 @@
 "use client";
-import styles from "@/app/page.module.css";
+
+import styles from "@/styles/home.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";

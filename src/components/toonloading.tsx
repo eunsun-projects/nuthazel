@@ -1,5 +1,6 @@
 "use client";
-import styles from "@/app/work/toon/page.module.css";
+
+import styles from "@/styles/toon.module.css";
 
 export default function ToonLoading() {
   return (
