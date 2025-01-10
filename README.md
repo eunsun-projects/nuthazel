@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Nuthazel
 
-## Getting Started
+### 일러스트레이터 홈페이지
 
-First, run the development server:
+개발기간: 2023.12 ~ 2024.03  
+플랫폼: web  
+개발인원: FE 1명(개인프로젝트)  
+담당역할: 프론트엔드
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 개발환경
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+언어: TypeScript ^5, HTML/CSS  
+프레임워크: Next.js 14, React 18  
+데이터베이스: Supabase Baas  
+라이브러리: zustand
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 주요기능
+#### ✅ 관리자 페이지
+🔹 일러스트 작가 본인만 사용할 수 있는 어드민 페이지를 구성했습니다.  
+🔹 어드민페이지에서 메인페이지에 노출될 콘텐츠를 CRUD 할 수 있습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### ✅ 다양한 기기에 대응하는 미디어쿼리
+🔹 직접 여러 기기에서 테스트 해보며 상세하게 대응하는 미디어쿼리를 작성했습니다.  
+🔹 다양한 기기에서 동일한 경험을 제공하며 크로스 브라우징에도 대응했습니다.
 
-## Learn More
+#### ✅ 이미지 최적화
+🔹 다수의 일러스트 이미지 파일을 빠른 속도로 제공하기 위해 다양한 최적화 기법을 도입했습니다.  
+🔹 관리자가 고용량의 이미지파일을 전송해도 webp로 변경 및 압축되어 적용되도록 하였습니다.
 
-To learn more about Next.js, take a look at the following resources:
+### 트러블 슈팅
+#### ✅ 많은 이미지 파일의 로딩 속도
+🔹 문제 : 일러스트 작가의 페이지다보니 이미지 파일이 매우 많았습니다. 모든 파일의 로딩을 기다리는 방식을 적용했으나, 조금만 로딩이 길어도 이탈율이 높았습니다.  
+🔹 해결 : Next.js Image 컴포넌트의 다양한 옵션을 조합하여 로딩 시간을 배 이상 단축했습니다.  
+🔹 성과 : 이미지 로딩이 최적화되면서 lighthouse 점수가 80점대에서 95점 이상으로 상승했습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### ✅ 이미지 중심 웹사이트의 반응형 구현
+🔹 문제 : 이미지 요소는 고정된 크기와 비율을 가지기 때문에 반응형 디자인을 구현하는데 어려움이 있었습니다.  
+🔹 해결 : module-css 를 사용하여 각 컴포넌트별로 세밀한 스타일링을 적용했습니다.  
+🔹 성과 : 다양한 디바이스에서 일관된 사용자 경험을 제공할 수 있었습니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### ✅ 이미지 업로드시 자동최적화
+🔹 문제 : 관리자가 이미지를 업로드하면 고화질 이미지도 webp 로 자동 최적화가 필요했습니다.  
+🔹 해결 : sharp 라이브러리로 서버측에서 최적화하려했으나, 응답 속도가 느려 클라이언트 측에서 Canvas API를 활용하여 이미지를 리사이즈 하도록 처리하였습니다.  
+🔹 성과 : 클라이언트 측에서 이미지를 최적화 함으로써 서버 부하를 줄이고 업로드 속도가 향상되었습니다.
 
-## Deploy on Vercel
+### 회고
+#### 좋았던 점
+다양한 이미지 핸들링
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+해당 프로젝트에서 가장 좋았던 점은,일러스트레이터의 홈페이지인 만큼 다양한 이미지 파일을 활용하여 웹페이지를 구성해볼 수 있었다는 점입니다.  
+어떻게 하면 가장 최적화된 경험을 제공할 수 있을지 고민해 볼 수 있었습니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### 아쉬웠던 점
+기술 스택 선택
+
+Three.js 등을 사용하여 동화책과 같은 페이지를 구성한다거나 Framer-motion 등으로 고도화된 애니메이션을 사용하고 싶었지만 클라이언트는 원하지 않아서 좀 더 단순하게 작업하게 된 부분이 조금 아쉬운 부분으로 남았습니다.
+
