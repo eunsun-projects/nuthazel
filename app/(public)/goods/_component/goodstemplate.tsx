@@ -1,12 +1,10 @@
 "use client";
 
-import Loading from "@/app/loading";
 import styles from "@/styles/goods.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
-const sticker = [
+const stickers = [
   ["/assets/goods/picnicbag.webp", "picnicbag"],
   ["/assets/goods/puppy.webp", "puppy"],
   ["/assets/goods/bam.webp", "bam"],
@@ -15,30 +13,21 @@ const sticker = [
   ["/assets/goods/seed.webp", "seed"],
   ["/assets/goods/watermelon.webp", "watermelon"],
 ];
-const albam = [
+const albams = [
   ["/assets/goods/albam1.webp", "albam1"],
   ["/assets/goods/albam2.webp", "albam2"],
   ["/assets/goods/albam3.webp", "albam3"],
 ];
 
 export default function GoodsTemplate() {
-  const [loadTrace, setLoadTrace] = useState(0);
-
-  const handleImgLoaded = () => {
-    setLoadTrace((prev) => prev + 1);
-  };
-
   return (
     <>
-      {loadTrace < sticker.length + albam.length && <Loading />}
-      <div
-        className={styles.page}
-        style={{
-          opacity: loadTrace === sticker.length + albam.length ? "1" : "0",
-        }}
-      >
+      <div className={styles.page}>
         <Link href={"https://smartstore.naver.com/nuthazel"} target="blank">
-          <div className={styles.shopdiv} style={{ zIndex: "1", cursor: "pointer" }}>
+          <div
+            className={styles.shopdiv}
+            style={{ zIndex: "1", cursor: "pointer" }}
+          >
             <p>ᨎᨎᨎᨎᨎᨎ</p>
             <div className={styles.door} style={{ position: "relative" }}>
               <Image
@@ -66,32 +55,40 @@ export default function GoodsTemplate() {
           </div>
         </Link>
 
-        {albam.map((e, i) => {
+        {albams.map((albam, idx) => {
           return (
-            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
+            <div
+              key={idx}
+              className={styles[albam[1]]}
+              style={{ position: "absolute" }}
+            >
               <Image
                 priority
-                src={e[0]}
+                src={albam[0]}
                 alt="elements"
                 fill
-                unoptimized
-                onLoad={handleImgLoaded}
+                // unoptimized
+                // onLoad={handleImgLoaded}
                 sizes="(max-width: 1920px) 100%, 100%"
               />
             </div>
           );
         })}
         <div className={styles.stickerdiv}>
-          {sticker.map((e, i) => {
+          {stickers.map((sticker, idx) => {
             return (
-              <div key={i} className={styles[e[1]]} style={{ position: "relative" }}>
+              <div
+                key={idx}
+                className={styles[sticker[1]]}
+                style={{ position: "relative" }}
+              >
                 <Image
                   priority
-                  src={e[0]}
+                  src={sticker[0]}
                   alt="elements"
                   fill
                   unoptimized
-                  onLoad={handleImgLoaded}
+                  // onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               </div>
