@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createRef, useCallback, useEffect, useRef, useState } from "react";
 
-const assetimg = [
+const assetimgs = [
   //창문
   ["/assets/work/window_shadow.webp", "windowshadow"],
   ["/assets/work/window.webp", "window"],
@@ -22,7 +22,11 @@ const assetimg = [
   ["/assets/work/mortar_shadow.webp", "mortarshadow"],
   ["/assets/work/mortar.webp", "mortar"],
   //클릭액자
-  ["/assets/work/clickframe_shadow.webp", "clickframeshadow", "/work/collaboration"],
+  [
+    "/assets/work/clickframe_shadow.webp",
+    "clickframeshadow",
+    "/work/collaboration",
+  ],
   ["/assets/work/clickframe.webp", "clickframe", "/work/collaboration"],
   //메모지
   ["/assets/work/memo_shadow.webp", "memoshadow"],
@@ -67,7 +71,7 @@ const assetimg = [
   ["/assets/work/stool.webp", "stool"],
 ];
 
-const potsmoke = [
+const potsmokes = [
   //연기
   ["/assets/work/pot_smoke1.webp", "potsmoke1", "/work/illustration"],
   ["/assets/work/pot_smoke2.webp", "potsmoke2", "/work/illustration"],
@@ -96,7 +100,7 @@ export default function WorkTemplate() {
   // const [loadTrace, setLoadTrace] = useState(0);
   const [smoke, setSmoke] = useState(0);
   const [bubble, setBubble] = useState(false);
-  const smokeRefs = useRef(potsmoke.map(() => createRef<HTMLDivElement>()));
+  const smokeRefs = useRef(potsmokes.map(() => createRef<HTMLDivElement>()));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef2 = useRef<NodeJS.Timeout | null>(null);
   const timerRef3 = useRef<NodeJS.Timeout | null>(null);
@@ -113,7 +117,7 @@ export default function WorkTemplate() {
         ref.current.style.opacity = "1";
 
         // 마지막 이미지가 나타난 후 모든 이미지를 숨기고, 애니메이션 재시작
-        if (index === potsmoke.length - 1) {
+        if (index === potsmokes.length - 1) {
           timerRef2.current = setTimeout(() => {
             smokeRefs.current.forEach((ref) => {
               if (!ref.current) return;
@@ -149,19 +153,17 @@ export default function WorkTemplate() {
 
   return (
     <>
-      {/* {loadTrace < assetimg.length + potsmoke.length && <Loading />} */}
-      <div
-        className={styles.page}
-        // style={{
-        //   opacity: loadTrace === assetimg.length + potsmoke.length ? "1" : "0",
-        // }}
-      >
-        {assetimg.map((e, i) => {
+      <div className={styles.page}>
+        {assetimgs.map((asset, idx) => {
           return (
-            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
-              {e[2] ? (
+            <div
+              key={idx}
+              className={styles[asset[1]]}
+              style={{ position: "absolute" }}
+            >
+              {asset[2] ? (
                 <Link
-                  href={e[2]}
+                  href={asset[2]}
                   style={{
                     position: "relative",
                     width: "100%",
@@ -172,22 +174,20 @@ export default function WorkTemplate() {
                 >
                   <Image
                     priority
-                    src={e[0]}
+                    src={asset[0]}
                     alt="elements"
                     fill
-                    // onLoad={handleImgLoaded}
-                    unoptimized
+                    // unoptimized
                     sizes="(max-width: 1920px) 100%, 100%"
                   ></Image>
                 </Link>
               ) : (
                 <Image
                   priority
-                  src={e[0]}
+                  src={asset[0]}
                   alt="elements"
                   fill
-                  // onLoad={handleImgLoaded}
-                  unoptimized
+                  // unoptimized
                   sizes="(max-width: 1920px) 100%, 100%"
                 ></Image>
               )}
@@ -195,16 +195,16 @@ export default function WorkTemplate() {
           );
         })}
 
-        {potsmoke.map((e, i) => {
+        {potsmokes.map((potsmoke, idx) => {
           return (
             <div
-              key={i}
-              className={styles[e[1]]}
-              ref={smokeRefs.current[i]}
+              key={idx}
+              className={styles[potsmoke[1]]}
+              ref={smokeRefs.current[idx]}
               style={{ position: "absolute" }}
             >
               <Link
-                href={e[2]}
+                href={potsmoke[2]}
                 style={{
                   position: "relative",
                   width: "100%",
@@ -214,11 +214,10 @@ export default function WorkTemplate() {
               >
                 <Image
                   priority
-                  src={e[0]}
+                  src={potsmoke[0]}
                   alt="elements"
                   fill
-                  // onLoad={handleImgLoaded}
-                  unoptimized
+                  // unoptimized
                   sizes="(max-width: 1920px) 100%, 100%"
                 ></Image>
               </Link>
@@ -230,7 +229,10 @@ export default function WorkTemplate() {
           menu.map((e, i) => {
             return (
               <Link key={i} href={e.url}>
-                <div className={`${styles.bubblebox} ${styles[e.title]}`} style={{ position: "absolute" }}>
+                <div
+                  className={`${styles.bubblebox} ${styles[e.title]}`}
+                  style={{ position: "absolute" }}
+                >
                   <div className={styles.bubble}>
                     <div className={styles.bubblecong}></div>
                     <div className={styles.bubblecong}></div>
