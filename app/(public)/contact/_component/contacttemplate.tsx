@@ -38,7 +38,7 @@ const assetstar = [
   {},
   {},
 ];
-const assetimg = [
+const assetimgs = [
   /*왼쪽나무4*/
   ["/assets/contact/left_tree4_shadow.webp", "leftshadow4"],
   ["/assets/contact/left_tree4.webp", "left4"],
@@ -68,11 +68,11 @@ const assetimg = [
   ["/assets/contact/bam2.webp", "bam2"],
   ["/assets/contact/bam3.webp", "bam3"],
 ];
-const postbox = [
+const postboxs = [
   ["/assets/contact/postboxshadow.webp", "postboxshadow"],
   ["/assets/contact/postbox.gif", "postbox"],
 ];
-const cloudimg = [
+const cloudimgs = [
   ["/assets/main/mid_cloud.webp", "midcloud"],
   ["/assets/main/small_cloud_copy.webp", "smallcloudcopy"],
   ["/assets/main/small_cloud.webp", "smallcloud"],
@@ -114,8 +114,6 @@ export default function ContactTemplate() {
     const reduced = generatePositions(assetstar.length);
 
     setXy(reduced);
-
-    // console.log(copy)
   }, []);
 
   return (
@@ -144,44 +142,52 @@ export default function ContactTemplate() {
               </div>
             );
           })}
-        {cloudimg.map((e, i) => {
+        {cloudimgs.map((cloud, idx) => {
           return (
-            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
+            <div
+              key={idx}
+              className={styles[cloud[1]]}
+              style={{ position: "absolute" }}
+            >
               <Image
                 priority
-                src={e[0]}
+                src={cloud[0]}
                 alt="elements"
                 fill
                 sizes="(max-width: 1920px) 100%, 100%"
-                unoptimized
+                // unoptimized
               />
             </div>
           );
         })}
-        {assetimg.map((e, i) => {
+        {assetimgs.map((asset, idx) => {
           return (
-            <div key={i} className={styles[e[1]]}>
+            <div key={idx} className={styles[asset[1]]}>
               <Image
                 priority
-                src={e[0]}
+                src={asset[0]}
                 alt="elements"
                 fill
                 sizes="(max-width: 1920px) 100%, 100%"
-                unoptimized
+                // unoptimized
               />
             </div>
           );
         })}
-        {postbox.map((e, i) => {
+        {postboxs.map((postBox, idx) => {
           return (
-            <div key={i} className={styles[e[1]]} style={{ opacity: gif ? "1" : "0" }}>
+            <div
+              key={idx}
+              className={styles[postBox[1]]}
+              style={{ opacity: gif ? "1" : "0" }}
+            >
               <Image
                 priority
-                src={e[0]}
+                src={postBox[0]}
                 alt="elements"
                 fill
                 sizes="(max-width: 1920px) 100%, 100%"
-                unoptimized
+                // unoptimized
               />
             </div>
           );
