@@ -10,7 +10,7 @@ const CanvasComp = dynamic(() => import("@/components/mushroom/canvas"), {
 });
 
 const dandelion = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-const assetimg = [
+const assetimgs = [
   //오른쪽나무
   ["/assets/main/right_tree1_shadow.webp", "righttree1shadow"],
   ["/assets/main/right_tree1.webp", "righttree1"],
@@ -54,7 +54,7 @@ const assetimg = [
   //텍스처
   // ["/assets/main/texture.webp", "texture"],
 ];
-const smokeimg = [
+const smokeimgs = [
   //연기
   ["/assets/main/smoke1.webp", "smoke1", "/work"],
   ["/assets/main/smoke2.webp", "smoke2", "/work"],
@@ -64,7 +64,7 @@ const smokeimg = [
   ["/assets/main/smoke6.webp", "smoke6", "/work"],
   ["/assets/main/smoke7.webp", "smoke7", "/work"],
 ];
-const cloudimg = [
+const cloudimgs = [
   ["/assets/main/mid_cloud.webp", "midcloud"],
   ["/assets/main/small_cloud_copy.webp", "smallcloudcopy"],
   ["/assets/main/small_cloud.webp", "smallcloud"],
@@ -80,14 +80,10 @@ export default function MainTemplate() {
   const [xy, setXy] = useState<{ x: number; y: number }[]>([]);
   const [smoke, setSmoke] = useState(0);
 
-  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(smokeimg.map(() => createRef()));
+  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(smokeimgs.map(() => createRef()));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef2 = useRef<NodeJS.Timeout | null>(null);
   const timerRef3 = useRef<NodeJS.Timeout | null>(null);
-
-  // const handleImgLoaded = () => {
-  //   setLoadTrace((prev) => prev + 1);
-  // };
 
   const runAnimation = () => {
     smokeRefs.current.forEach((ref, index) => {
@@ -97,7 +93,7 @@ export default function MainTemplate() {
         (ref.current as HTMLElement).style.opacity = "1";
 
         // 마지막 이미지가 나타난 후 모든 이미지를 숨기고, 애니메이션 재시작
-        if (index === smokeimg.length - 1) {
+        if (index === smokeimgs.length - 1) {
           timerRef2.current = setTimeout(() => {
             smokeRefs.current.forEach((ref) => {
               (ref.current as HTMLElement).style.opacity = "0";
@@ -157,16 +153,7 @@ export default function MainTemplate() {
 
   return (
     <>
-      {/* {loadTrace < assetimg.length + cloudimg.length + smokeimg.length + dandelion.length && <Loading />} */}
-      <div
-        className={styles.mainpage}
-        // style={{
-        //   opacity:
-        //     loadTrace === assetimg.length + cloudimg.length + smokeimg.length + dandelion.length
-        //       ? "1"
-        //       : "0",
-        // }}
-      >
+      <div className={styles.mainpage}>
         {xy.length === 20 &&
           dandelion.map((e, i) => {
             return (
@@ -184,22 +171,20 @@ export default function MainTemplate() {
                   alt="elements"
                   fill
                   unoptimized
-                  // onLoad={handleImgLoaded}
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               </div>
             );
           })}
-        {cloudimg.map((e, i) => {
+        {cloudimgs.map((cloud, idx) => {
           return (
-            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
+            <div key={idx} className={styles[cloud[1]]} style={{ position: "absolute" }}>
               <Image
                 priority
-                src={e[0]}
+                src={cloud[0]}
                 alt="elements"
                 fill
-                unoptimized
-                // onLoad={handleImgLoaded}
+                // unoptimized
                 sizes="(max-width: 1920px) 100%, 100%"
               />
             </div>
@@ -207,12 +192,12 @@ export default function MainTemplate() {
         })}
 
         <div className={styles.background}></div>
-        {assetimg.map((e, i) => {
+        {assetimgs.map((asset, idx) => {
           return (
-            <div key={i} className={styles[e[1]]} style={{ position: "absolute" }}>
-              {e[2] ? (
+            <div key={idx} className={styles[asset[1]]} style={{ position: "absolute" }}>
+              {asset[2] ? (
                 <Link
-                  href={e[2]}
+                  href={asset[2]}
                   prefetch={false}
                   style={{
                     position: "absolute",
@@ -222,22 +207,20 @@ export default function MainTemplate() {
                 >
                   <Image
                     priority
-                    src={e[0]}
+                    src={asset[0]}
                     alt="elements"
                     fill
-                    unoptimized
-                    // onLoad={handleImgLoaded}
+                    // unoptimized
                     sizes="(max-width: 1920px) 100%, 100%"
                   />
                 </Link>
               ) : (
                 <Image
                   priority
-                  src={e[0]}
+                  src={asset[0]}
                   alt="elements"
                   fill
-                  unoptimized
-                  // onLoad={handleImgLoaded}
+                  // unoptimized
                   sizes="(max-width: 1920px) 100%, 100%"
                 />
               )}
@@ -245,16 +228,16 @@ export default function MainTemplate() {
           );
         })}
 
-        {smokeimg.map((e, i) => {
+        {smokeimgs.map((smoke, idx) => {
           return (
             <div
-              key={i}
-              ref={smokeRefs.current[i]}
-              className={styles[e[1]]}
+              key={idx}
+              ref={smokeRefs.current[idx]}
+              className={styles[smoke[1]]}
               style={{ position: "absolute" }}
             >
               <Link
-                href={e[2]}
+                href={smoke[2]}
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -263,7 +246,7 @@ export default function MainTemplate() {
               >
                 <Image
                   priority
-                  src={e[0]}
+                  src={smoke[0]}
                   alt="elements"
                   fill
                   unoptimized
