@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const provider = searchParams.get("provider");
 
   const queryClient = new QueryClient();
-  const supabase = createClient();
+  const supabase = await createClient();
   if (!PUBLIC_URL) {
     return NextResponse.json({ error: "PUBLIC_URL is not set" }, { status: 401 });
   }

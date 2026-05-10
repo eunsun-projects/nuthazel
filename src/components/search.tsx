@@ -3,7 +3,7 @@
 import styles from "@/styles/home.module.css";
 import { NutHazelAll } from "@/types/NutHazel.type";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 interface SearchProps {
   searchDb: NutHazelAll;
@@ -141,10 +141,6 @@ export default function Search({ searchDb }: SearchProps) {
     }
   };
 
-  useEffect(() => {
-    console.log(searchResult);
-  }, [searchResult]);
-
   return (
     <>
       {searched && (
@@ -188,7 +184,7 @@ export default function Search({ searchDb }: SearchProps) {
           type="search"
           name="search"
           placeholder=""
-          onInput={handleInput}
+          onChange={handleInput}
           onKeyDown={handleKeydown}
           className={styles.searchinput}
         ></input>

@@ -80,7 +80,7 @@ export default function MainTemplate() {
   const [xy, setXy] = useState<{ x: number; y: number }[]>([]);
   const [smoke, setSmoke] = useState(0);
 
-  const smokeRefs = useRef<React.RefObject<HTMLDivElement>[]>(smokeimgs.map(() => createRef()));
+  const smokeRefs = useRef(smokeimgs.map(() => createRef<HTMLDivElement>()));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef2 = useRef<NodeJS.Timeout | null>(null);
   const timerRef3 = useRef<NodeJS.Timeout | null>(null);

@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -38,7 +38,7 @@ export async function GET() {
 // 서버에서 요청할 때
 export async function POST(req: NextRequest) {
   const { userId } = await req.json();
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: user, error: userError } = await supabase
     .from("users")
     .select("*")
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();
 

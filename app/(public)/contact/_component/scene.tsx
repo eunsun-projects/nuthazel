@@ -18,7 +18,7 @@ export default function Scene({ ...props }) {
 
   const [camMoving, setCamMoving] = useState(true);
 
-  const letterRef = useRef<THREE.Group>();
+  const letterRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
     if (letterRef.current) {

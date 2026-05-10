@@ -6,23 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import Script from "next/script";
 import { useRef } from "react";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "model-viewer": MyElementAttributes;
-    }
-    interface MyElementAttributes {
-      src: string;
-      class: string;
-      poster: string;
-      "camera-controls": boolean;
-      "auto-rotate": boolean;
-      "shadow-intensity": string;
-      "camera-orbit": string;
-    }
-  }
-}
-
 interface MushroomModalProps {
   setModalOpen: (open: boolean) => void;
 }

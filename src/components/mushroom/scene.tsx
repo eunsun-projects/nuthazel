@@ -14,7 +14,7 @@ interface SceneProps {
 export default function Scene({ classification, handleClick }: SceneProps) {
   const mushroom = useLoader(GLTFLoader, "/assets/glb/mushroom_join.glb");
 
-  const mushroomRef = useRef<THREE.Group>();
+  const mushroomRef = useRef<THREE.Group>(null);
 
   useFrame(({ clock }, delta) => {
     if (mushroomRef.current && classification !== "main") {

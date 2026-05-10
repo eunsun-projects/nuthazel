@@ -1,18 +1,18 @@
 {
-	"name": "nuthazle",
+	"name": "nuthazel",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
+		"lint": "eslint .",
 		"genTypes": "pnpm dlx supabase gen types typescript --project-id \"soaxdfdarjixtzlluzhs\" --schema public > src/types/supabase.ts"
 	},
 	"dependencies": {
 		"@emailjs/browser": "^4.4.1",
-		"@react-three/drei": "^9.122.0",
-		"@react-three/fiber": "^8.18.0",
+		"@react-three/drei": "^10.7.7",
+		"@react-three/fiber": "^9.6.1",
 		"@supabase/ssr": "^0.8.0",
 		"@supabase/supabase-js": "^2.87.1",
 		"@svgr/webpack": "^8.1.0",
@@ -20,20 +20,20 @@
 		"@tanstack/react-query-devtools": "^5.91.1",
 		"@types/three": "^0.159.0",
 		"@vercel/analytics": "^1.6.1",
-		"next": "14.2.35",
+		"next": "16.2.6",
 		"prettier": "^3.7.4",
-		"pure-react-carousel": "^1.32.0",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"react-zoom-pan-pinch": "^3.7.0",
-		"sharp": "^0.33.5",
+		"pure-react-carousel": "^1.35.0",
+		"react": "19.2.6",
+		"react-dom": "19.2.6",
+		"react-zoom-pan-pinch": "^4.0.3",
+		"sharp": "^0.34.5",
 		"three": "^0.159.0"
 	},
 	"devDependencies": {
 		"@types/node": "^22.19.2",
-		"@types/react": "^18.3.27",
+		"@types/react": "19.2.14",
 		"eslint": "^9.39.2",
-		"eslint-config-next": "^14.2.35",
+		"eslint-config-next": "16.2.6",
 		"typescript": "^5.9.3"
 	}
 }

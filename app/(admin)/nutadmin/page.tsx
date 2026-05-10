@@ -21,7 +21,7 @@ export const metadata = basicMeta;
 export const viewport = basicViewport;
 
 export default async function NutAdminPage() {
-  const userId = getUserFromHeaders();
+  const userId = await getUserFromHeaders();
 
   const queryClient = new QueryClient();
 

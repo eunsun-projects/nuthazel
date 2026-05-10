@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const id = formData.get("id");
   const files = formData.getAll("imgs");
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   const payload: Collabo = await request.json();
-  const supabase = createClient();
+  const supabase = await createClient();
 
   for (const img of payload.imgurl) {
     const match = img.match(/\/[^\/]+\/([^\/]+)$/);
