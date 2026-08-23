@@ -1,0 +1,13 @@
+# 실제 스캔 로직은 공유 레포에 있다:
+#   https://github.com/eunohhh/gh-workflows/blob/main/.github/workflows/gitleaks.yml
+# 오탐은 이 레포 루트의 .gitleaksignore 로 관리한다.
+name: gitleaks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  gitleaks:
+    uses: eunohhh/gh-workflows/.github/workflows/gitleaks.yml@main
