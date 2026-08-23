@@ -1,0 +1,12 @@
+# gitleaks 오탐 목록 (fingerprint = commit:file:rule:line)
+#
+# 새 항목을 넣기 전에 반드시 실제 값을 확인할 것.
+# 진짜 시크릿이면 여기 등록하는 게 아니라 "키 로테이션"이 먼저다.
+# 히스토리를 지워도 fork·클론·CI 로그·로컬 사본에 남는다.
+## ── Firebase 프로젝트 ID (src/firebase/admin.js) ──
+# admin.credential.cert 호출의 두 번째 인자가 Firebase 프로젝트 ID 인데,
+# generic-api-key 룰이 이를 자격증명으로 오인했다. 프로젝트 ID 는 공개 정보다.
+#
+# ⚠️ 이 파일에 오탐 사유를 적을 때 원본 문자열을 그대로 옮기지 말 것.
+#    같은 룰이 이 파일에서 다시 걸린다. 실제로 한 번 겪었다.
+85690b6ad63a76e3bf40fe1160d9ef1b7a551153:src/firebase/admin.js:generic-api-key:11
