@@ -20,20 +20,20 @@
 		"@tanstack/react-query-devtools": "^5.91.1",
 		"@types/three": "^0.159.0",
 		"@vercel/analytics": "^1.6.1",
-		"next": "16.2.6",
+		"next": "16.4.2",
 		"prettier": "^3.7.4",
 		"pure-react-carousel": "^1.35.0",
 		"react": "19.2.6",
 		"react-dom": "19.2.6",
 		"react-zoom-pan-pinch": "^4.0.3",
-		"sharp": "^0.34.5",
+		"sharp": "^0.35.5",
 		"three": "^0.159.0"
 	},
 	"devDependencies": {
 		"@types/node": "^22.19.2",
 		"@types/react": "19.2.14",
 		"eslint": "^9.39.2",
-		"eslint-config-next": "16.2.6",
+		"eslint-config-next": "16.4.2",
 		"typescript": "^5.9.3"
 	}
 }
